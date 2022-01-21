@@ -19,10 +19,6 @@ public class CameraCollision : MonoBehaviour
         directionNormalized = defaultPos.normalized;
         parentTransform = transform.parent;
         defaultDistance = Vector3.Distance(defaultPos, Vector3.zero);
-
-        //Lock cursor
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
     }
 
     // LateUpdate is called after Update
