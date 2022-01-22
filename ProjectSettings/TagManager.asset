@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Boost
   - Target
+  - Sidescroll
+  - Spring
   layers:
   - Default
   - TransparentFX
