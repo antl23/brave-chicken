@@ -54,7 +54,6 @@ public class Player : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log(other.tag);
         switch (other.tag)
         {
             case "Boost":
@@ -64,7 +63,6 @@ public class Player : MonoBehaviour
                 break;
             case "Camera":
                 CameraPosition camPos = other.GetComponent<CameraTrigger>().cameraPosition;
-                Debug.Log(camPos);
                 switch (camPos)
                 {
                     case CameraPosition.Rear:
@@ -94,9 +92,15 @@ public class Player : MonoBehaviour
                 other.gameObject.GetComponent<AudioSource>().Play();
                 direction.y = jumpSpeed * 2;
                 Animator animator = other.gameObject.GetComponent<Animator>();
-                Debug.Log(animator.GetParameter(0));
                 animator.SetTrigger("Bounce");
-                Debug.Log("Bounce");
+                break;
+            case "Spikes":
+                other.gameObject.GetComponent<AudioSource>().Play();
+                other.gameObject.GetComponent<Animator>().SetTrigger("Activate");
+                TakeDamage();
+                break;
+            case "Saw":
+                TakeDamage();
                 break;
         }
 /*        // Debug.Log(other.tag);
@@ -148,7 +152,6 @@ public class Player : MonoBehaviour
         // Debug.Log(other.tag);
         if (other.tag == "Sidescroll")
         {
-            Debug.Log("Exit");
             // inTrigger = false;
           /*  characterController.enabled = false;
             transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z);
@@ -241,7 +244,6 @@ public class Player : MonoBehaviour
             cameraMoveAmount = Mathf.Clamp(cameraMoveAmount, 0.0f, 1.0f);
             cameraTransform.LookAt(cameraCenter);
             // cameraTransform.rotation = Quaternion.Lerp()
-            Debug.Log(Vector3.Distance(cameraTransform.localPosition, cameraTarget.Value));
             if (cameraMoveAmount == 1)
             {
                 cameraTransform.localPosition = cameraTarget.Value;
@@ -273,7 +275,8 @@ public class Player : MonoBehaviour
         rotating = false;
     }
 
-    void UpdateCameraPos(CameraPosition camPos)
+    void TakeDamage()
     {
+        GetComponent<AudioSource>().Play();
     }
 }

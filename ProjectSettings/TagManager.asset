@@ -9,6 +9,8 @@ TagManager:
   - Sidescroll
   - Spring
   - Camera
+  - Spikes
+  - Saw
   layers:
   - Default
   - TransparentFX

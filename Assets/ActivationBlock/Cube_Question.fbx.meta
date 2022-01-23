@@ -1,14 +1,8 @@
 fileFormatVersion: 2
-guid: 1335fffd4dc6bbe4b83bc6e371d48f9e
+guid: 2aafaff142a5e1745a92f48f1eb9901b
 ModelImporter:
   serializedVersion: 21100
-  internalIDToNameTable:
-  - first:
-      74: 8253558349716903615
-    second: SpikeTrap_Activate
-  - first:
-      74: 7361817474926447254
-    second: Hazard_SpikeTrap_Armature|SpikeTrap_Activate
+  internalIDToNameTable: []
   externalObjects: {}
   materials:
     materialImportMode: 2
@@ -100,7 +94,7 @@ ModelImporter:
   autoGenerateAvatarMappingIfUnspecified: 1
   animationType: 2
   humanoidOversampling: 1
-  avatarSetup: 1
+  avatarSetup: 0
   addHumanoidExtraRootOnlyWhenUsingAvatar: 1
   additionalBone: 0
   userData: 
