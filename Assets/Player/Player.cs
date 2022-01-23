@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 [RequireComponent(typeof(CharacterController))]
@@ -13,18 +14,27 @@ public class Player : MonoBehaviour
     public Transform cameraTransform;
     public Transform meshTransform;
     public Animator playerAnimator;
+    public Transform rearCameraPoint;
+    public Transform frontCameraPoint;
+    public Transform leftCameraPoint;
+    public Transform rightCameraPoint;
+    public Transform cameraCenter;
+    public CameraPosition cameraPosition = CameraPosition.Rear;
     public float lookSpeed = 20.0f;
     public float lookXLimit = 60.0f;
     private bool canDoubleJump = true;
     private bool canDash = true;
     private uint dashTimer = 0;
     private bool sideScroll = false;
-    private bool inTrigger = false;
+    // private bool inTrigger = false;
     private float saveZ;
     private bool warp = false;
     private CameraTrigger lastTrigger;
     private CameraPosition camPos = CameraPosition.Rear;
     private Vector3? cameraTarget;
+    private bool rotating = false;
+    private Vector3 startCamPos;
+    private float cameraMoveAmount = 0.0f;
 
     public bool canMove = true;
 
@@ -36,11 +46,60 @@ public class Player : MonoBehaviour
     {
         characterController = GetComponent<CharacterController>();
         rotation.y = transform.eulerAngles.y;
+        // frontCameraPoint;
+        // cameraTarget = frontCameraPoint.position;
+        // StartCoroutine(rotateObject(cameraTransform, cameraTarget.rotation.eulerAngles, 3f));
+        cameraTransform.LookAt(cameraCenter);
     }
 
     private void OnTriggerEnter(Collider other)
     {
         Debug.Log(other.tag);
+        switch (other.tag)
+        {
+            case "Boost":
+                canDoubleJump = true;
+                canDash = true;
+                Destroy(other.gameObject);
+                break;
+            case "Camera":
+                CameraPosition camPos = other.GetComponent<CameraTrigger>().cameraPosition;
+                Debug.Log(camPos);
+                switch (camPos)
+                {
+                    case CameraPosition.Rear:
+                        cameraTarget = rearCameraPoint.localPosition;
+                        startCamPos = cameraTransform.localPosition;
+                        cameraMoveAmount = 0.0f;
+                        // cameraTransform.SetParent(rearCameraPoint, false);
+                        break;
+                    case CameraPosition.Front:
+                        cameraTarget = frontCameraPoint.localPosition;
+                        startCamPos = cameraTransform.localPosition;
+                        cameraMoveAmount = 0.0f;
+                        break;
+                    case CameraPosition.Left:
+                        cameraTarget = leftCameraPoint.localPosition;
+                        startCamPos = cameraTransform.localPosition;
+                        cameraMoveAmount = 0.0f;
+                        break;
+                    case CameraPosition.Right:
+                        cameraTarget = rightCameraPoint.localPosition;
+                        startCamPos = cameraTransform.localPosition;
+                        cameraMoveAmount = 0.0f;
+                        break;
+                }
+                break;
+            case "Spring":
+                other.gameObject.GetComponent<AudioSource>().Play();
+                direction.y = jumpSpeed * 2;
+                Animator animator = other.gameObject.GetComponent<Animator>();
+                Debug.Log(animator.GetParameter(0));
+                animator.SetTrigger("Bounce");
+                Debug.Log("Bounce");
+                break;
+        }
+/*        // Debug.Log(other.tag);
         if (other.tag == "Boost") {
             canDoubleJump = true;
             canDash = true;
@@ -57,7 +116,7 @@ public class Player : MonoBehaviour
             characterController.enabled = false;
             characterController.transform.position = new Vector3(other.transform.position.x, transform.position.y, other.transform.position.z);
             characterController.enabled = true;
-            if (camPos == CameraPosition.Side) {
+            *//*if (camPos == CameraPosition.Side) {
                 sideScroll = true;
                 Debug.Log("Side");
                 cameraTarget = cameraPoint.transform.position;
@@ -71,21 +130,26 @@ public class Player : MonoBehaviour
                 cameraTarget = cameraPoint.transform.position;
                 cameraTransform.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
                 sideScroll = false;
-            }
+            }*//*
         }
         if (other.tag == "Spring")
         {
+            other.gameObject.GetComponent<AudioSource>().Play();
             direction.y = jumpSpeed * 2;
-        }
+            Animator animator = other.gameObject.GetComponent<Animator>();
+            Debug.Log(animator.GetParameter(0));
+            animator.SetTrigger("Bounce");
+            Debug.Log("Bounce");
+        }*/
     }
 
     private void OnTriggerExit(Collider other)
     {
-        Debug.Log(other.tag);
+        // Debug.Log(other.tag);
         if (other.tag == "Sidescroll")
         {
             Debug.Log("Exit");
-            inTrigger = false;
+            // inTrigger = false;
           /*  characterController.enabled = false;
             transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z);
             characterController.enabled = true;*/
@@ -96,13 +160,12 @@ public class Player : MonoBehaviour
     void Update()
     {
         if (!characterController.isGrounded) {
-            Debug.Log("InAir");
             playerAnimator.SetBool("InAir", true);
         } else
         {
             playerAnimator.SetBool("InAir", false);
         }
-        if (canMove && cameraTarget == null)
+        if (canMove)
         {
             Vector3 forward = new Vector3(cameraTransform.transform.forward.x, 0, cameraTransform.transform.forward.z);
             Vector3 right = new Vector3(cameraTransform.transform.right.x, 0, cameraTransform.transform.right.z);
@@ -166,12 +229,51 @@ public class Player : MonoBehaviour
         }
         if (cameraTarget != null)
         {
-            float step = lookSpeed * Time.deltaTime;
-            cameraTransform.position= Vector3.MoveTowards(cameraTransform.position, cameraTarget.Value, step);
-            cameraTransform.LookAt(transform.position);
-            if (cameraTransform.position == cameraTarget) {
+            // float step = Mathf.Range;//lookSpeed * Time.deltaTime;
+           /* Vector3 newPos = Vector3.MoveTowards(cameraTransform.position, cameraTarget.Value, step);
+            if (cameraTransform.position == newPos)
+            {
                 cameraTarget = null;
-            }        
+                return;
+            }*/
+            cameraTransform.localPosition = Vector3.Lerp(startCamPos, cameraTarget.Value, cameraMoveAmount);
+            cameraMoveAmount += Time.deltaTime * lookSpeed;
+            cameraMoveAmount = Mathf.Clamp(cameraMoveAmount, 0.0f, 1.0f);
+            cameraTransform.LookAt(cameraCenter);
+            // cameraTransform.rotation = Quaternion.Lerp()
+            Debug.Log(Vector3.Distance(cameraTransform.localPosition, cameraTarget.Value));
+            if (cameraMoveAmount == 1)
+            {
+                cameraTransform.localPosition = cameraTarget.Value;
+                cameraMoveAmount = 0.0f;
+                cameraTarget = null;
+            }
         }
+    }
+
+    IEnumerator rotateObject(Transform gameObjectToMove, Vector3 eulerAngles, float duration)
+    {
+        if (rotating)
+        {
+            yield break;
+        }
+        rotating = true;
+
+        Vector3 newRot = gameObjectToMove.eulerAngles + eulerAngles;
+
+        Vector3 currentRot = gameObjectToMove.eulerAngles;
+
+        float counter = 0;
+        while (counter < duration)
+        {
+            counter += Time.deltaTime;
+            gameObjectToMove.eulerAngles = Vector3.Lerp(currentRot, newRot, counter / duration);
+            yield return null;
+        }
+        rotating = false;
+    }
+
+    void UpdateCameraPos(CameraPosition camPos)
+    {
     }
 }

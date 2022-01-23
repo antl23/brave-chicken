@@ -5,7 +5,9 @@ using UnityEngine;
 public enum CameraPosition
 {
     Rear,
-    Side
+    Front,
+    Left,
+    Right
 }
 
 public class CameraTrigger : MonoBehaviour

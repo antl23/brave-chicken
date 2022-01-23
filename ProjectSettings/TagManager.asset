@@ -8,6 +8,7 @@ TagManager:
   - Target
   - Sidescroll
   - Spring
+  - Camera
   layers:
   - Default
   - TransparentFX
