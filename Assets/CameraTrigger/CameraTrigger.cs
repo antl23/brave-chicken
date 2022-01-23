@@ -12,8 +12,6 @@ public enum CameraPosition
 
 public class CameraTrigger : MonoBehaviour
 {
-    // Start is called before the first frame update
-    public GameObject cameraPoint;
     public CameraPosition cameraPosition;
 
     void Start()

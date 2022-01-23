@@ -52,10 +52,23 @@ public class Player : MonoBehaviour
         cameraTransform.LookAt(cameraCenter);
     }
 
+    private void OnCollisionStay(Collision col)
+    {
+        Debug.Log(col.gameObject.tag);
+        if (col.gameObject.tag == "Platform")
+        {
+            transform.position = col.gameObject.transform.position;
+        }
+    }
+
     private void OnTriggerEnter(Collider other)
     {
+        Debug.Log(other.tag);
         switch (other.tag)
         {
+            case "Platform":
+                transform.SetParent(other.transform);
+                break;
             case "Boost":
                 canDoubleJump = true;
                 canDash = true;
@@ -157,6 +170,10 @@ public class Player : MonoBehaviour
             transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z);
             characterController.enabled = true;*/
             // sideScroll = false;
+        }
+        if (other.tag == "Platform")
+        {
+            transform.SetParent(null);
         }
     }
 

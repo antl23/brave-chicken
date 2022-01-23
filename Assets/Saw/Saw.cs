@@ -17,7 +17,7 @@ public class Saw : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         if (Time.timeScale == 1)
         {
@@ -25,10 +25,12 @@ public class Saw : MonoBehaviour
             if (transform.position == start.position)
             {
                 returning = false;
+                GetComponent<AudioSource>().Play();
             }
             else if (transform.position == end.position)
             {
                 returning = true;
+                GetComponent<AudioSource>().Play();
             }
             transform.Rotate(Vector3.up, turnRate); 
         }
