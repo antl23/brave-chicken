@@ -63,7 +63,7 @@ public class Player : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log(other.tag);
+        //Debug.Log(other.tag);
         switch (other.tag)
         {
             case "Platform":
@@ -173,6 +173,7 @@ public class Player : MonoBehaviour
         }
         if (other.tag == "Platform")
         {
+            Debug.Log("Platform");
             transform.SetParent(null);
         }
     }

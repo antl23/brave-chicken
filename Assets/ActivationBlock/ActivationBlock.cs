@@ -66,6 +66,7 @@ public class ActivationBlock : MonoBehaviour
 
     private void Activate()
     {
+        GetComponent<AudioSource>().Play();
         isActive = true;
         activeObject.SetActive(true);
         inactiveObject.SetActive(false);
@@ -74,6 +75,7 @@ public class ActivationBlock : MonoBehaviour
 
     private void Deactivate()
     {
+        GetComponent<AudioSource>().Play();
         isActive = false;
         activeObject.SetActive(false);
         inactiveObject.SetActive(true);

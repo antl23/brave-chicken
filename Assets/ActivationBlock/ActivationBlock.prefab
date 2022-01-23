@@ -484,6 +484,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Metal
       objectReference: {fileID: 0}
+    - target: {fileID: 2541264240847823435, guid: 1d9a9e46e147f4f4cb920095992e5645, type: 3}
+      propertyPath: m_TagString
+      value: Platform
+      objectReference: {fileID: 0}
     - target: {fileID: 3711762669716837577, guid: 1d9a9e46e147f4f4cb920095992e5645, type: 3}
       propertyPath: m_RootOrder
       value: 0
