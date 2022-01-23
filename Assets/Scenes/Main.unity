@@ -3132,6 +3132,10 @@ PrefabInstance:
       propertyPath: moveRate
       value: 0.1
       objectReference: {fileID: 0}
+    - target: {fileID: 2341132781696089916, guid: de05ac799b6920b41a8d2db3f0a6d0e0, type: 3}
+      propertyPath: turnRate
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 5598686912502548630, guid: de05ac799b6920b41a8d2db3f0a6d0e0, type: 3}
       propertyPath: m_LocalPosition.x
       value: -17.03
