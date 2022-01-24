@@ -77,7 +77,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - Mult: 4
+    - Mult: 2
     - _AlphaClip: 0
     - _Blend: 0
     - _BumpScale: 1
@@ -107,7 +107,7 @@ Material:
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
-    - Mask: {r: 1, g: 1, b: 1, a: 0}
+    - Mask: {r: 0.6037736, g: 0.6037736, b: 0.6037736, a: 0}
     - RimColor: {r: 0.6941286, g: 0.43787828, b: 0.75471693, a: 0}
     - _BaseColor: {r: 0.38665617, g: 0.1749776, b: 0.17005518, a: 1}
     - _Color: {r: 0.3773585, g: 0.10857955, b: 0.10857955, a: 1}
