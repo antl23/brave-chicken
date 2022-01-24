@@ -8,13 +8,17 @@ public class ActivationBlock : MonoBehaviour
     public GameObject activeObject;
     public Transform objectToMove;
     public Transform moveTarget;
+    public Color startColor;
     public Color activeColor;
+    public Color secondaryStartColor;
+    public Color secondaryActiveColor;
     public float moveSpeed;
     public bool isActive;
-    public Material objectMaterial;
+    //public Material objectMaterial;
+    public GameObject objectMaterial;
     private Vector3 startPos;
     private bool returning;
-    private Color startColor;
+    // private Color startColor;
 
 
     // Start is called before the first frame update
@@ -23,7 +27,10 @@ public class ActivationBlock : MonoBehaviour
         if (!isActive) Deactivate();
         startPos = objectToMove.position;
         Debug.Log(objectToMove.position + " " + moveTarget.position);
-        startColor = objectMaterial.color;
+        // startColor = objectMaterial.color;
+        // startColor = Color.gray; // objectMaterial.color;
+        // objectMaterial.GetComponent<Renderer>().material.color = startColor;
+        //objectMaterial.color = startColor;
     }
 
     // Update is called once per frame
@@ -70,7 +77,10 @@ public class ActivationBlock : MonoBehaviour
         isActive = true;
         activeObject.SetActive(true);
         inactiveObject.SetActive(false);
-        objectMaterial.color = activeColor;
+        //objectMaterial.color = activeColor;
+        Material[] materials = objectMaterial.GetComponent<Renderer>().materials;
+        materials[0].color = activeColor;
+        materials[1].color = secondaryActiveColor;
     }
 
     private void Deactivate()
@@ -79,6 +89,9 @@ public class ActivationBlock : MonoBehaviour
         isActive = false;
         activeObject.SetActive(false);
         inactiveObject.SetActive(true);
-        objectMaterial.color = startColor;
+        //objectMaterial.color = startColor;
+        Material[] materials = objectMaterial.GetComponent<Renderer>().materials;
+        materials[0].color = startColor;
+        materials[1].color = secondaryStartColor;
     }
 }

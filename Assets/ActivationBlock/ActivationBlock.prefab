@@ -70,10 +70,13 @@ MonoBehaviour:
   activeObject: {fileID: 1154343408767372184}
   objectToMove: {fileID: 234108802641251032}
   moveTarget: {fileID: 3491479316211014056}
-  activeColor: {r: 0.8113208, g: 0.6310273, b: 0, a: 0}
+  startColor: {r: 0.2830189, g: 0.2830189, b: 0.2830189, a: 0}
+  activeColor: {r: 0.6792453, g: 0.5270646, b: 0, a: 0}
+  secondaryStartColor: {r: 0.16981131, g: 0.16981131, b: 0.16981131, a: 0}
+  secondaryActiveColor: {r: 0.9339623, g: 0.7224992, b: 0, a: 0}
   moveSpeed: 0.05
   isActive: 0
-  objectMaterial: {fileID: -7752290007161701606, guid: d28367562ecbb224fa5ea4c89cab42a7, type: 3}
+  objectMaterial: {fileID: 1383407926073640776}
 --- !u!65 &3714065164528326014
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -321,8 +324,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 2, y: 0.2, z: 2}
-  m_Center: {x: 0, y: 1.1, z: 0}
+  m_Size: {x: 2, y: 0.5, z: 2}
+  m_Center: {x: 0, y: 1.25, z: 0}
 --- !u!1001 &624866415706426280
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -569,5 +572,10 @@ PrefabInstance:
 --- !u!4 &8719955688427476756 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3711762669716837577, guid: 1d9a9e46e147f4f4cb920095992e5645, type: 3}
+  m_PrefabInstance: {fileID: 5368665710410777565}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1383407926073640776 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6463667297399506069, guid: 1d9a9e46e147f4f4cb920095992e5645, type: 3}
   m_PrefabInstance: {fileID: 5368665710410777565}
   m_PrefabAsset: {fileID: 0}
