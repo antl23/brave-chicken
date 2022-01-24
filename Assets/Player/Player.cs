@@ -20,6 +20,7 @@ public class Player : MonoBehaviour
     public Transform rightCameraPoint;
     public Transform cameraCenter;
     public CameraPosition cameraPosition = CameraPosition.Rear;
+    public GameObject shadowObject;
     public float lookSpeed = 20.0f;
     public float lookXLimit = 60.0f;
     private bool canDoubleJump = true;
@@ -35,6 +36,7 @@ public class Player : MonoBehaviour
     private bool rotating = false;
     private Vector3 startCamPos;
     private float cameraMoveAmount = 0.0f;
+    private GameObject shadow;
 
     public bool canMove = true;
 
@@ -50,6 +52,7 @@ public class Player : MonoBehaviour
         // cameraTarget = frontCameraPoint.position;
         // StartCoroutine(rotateObject(cameraTransform, cameraTarget.rotation.eulerAngles, 3f));
         cameraTransform.LookAt(cameraCenter);
+        shadow = Instantiate(shadowObject, transform);
     }
 
     private void OnCollisionStay(Collision col)
@@ -268,6 +271,11 @@ public class Player : MonoBehaviour
                 cameraMoveAmount = 0.0f;
                 cameraTarget = null;
             }
+        }
+        RaycastHit hit;
+        if (Physics.Raycast(transform.position, Vector3.down, out hit, Mathf.Infinity))
+        {
+            shadow.transform.position = hit.point;
         }
     }
 

@@ -6,7 +6,8 @@ public class ActivationBlock : MonoBehaviour
 {
     public GameObject inactiveObject;
     public GameObject activeObject;
-    public Transform objectToMove;
+    public Transform startPosition;
+    public GameObject platform;
     public Transform moveTarget;
     public Color startColor;
     public Color activeColor;
@@ -15,22 +16,22 @@ public class ActivationBlock : MonoBehaviour
     public float moveSpeed;
     public bool isActive;
     //public Material objectMaterial;
-    public GameObject objectMaterial;
-    private Vector3 startPos;
+    // public GameObject objectMaterial;
     private bool returning;
+    private GameObject objectToMove;
     // private Color startColor;
 
 
     // Start is called before the first frame update
     void Start()
     {
-        if (!isActive) Deactivate();
-        startPos = objectToMove.position;
-        Debug.Log(objectToMove.position + " " + moveTarget.position);
+        // if (!isActive) Deactivate();
+        // Debug.Log(objectToMove.transform.position + " " + moveTarget.position);
         // startColor = objectMaterial.color;
         // startColor = Color.gray; // objectMaterial.color;
         // objectMaterial.GetComponent<Renderer>().material.color = startColor;
         //objectMaterial.color = startColor;
+        objectToMove = Instantiate(platform, startPosition.transform.position, Quaternion.identity);
     }
 
     // Update is called once per frame
@@ -39,31 +40,32 @@ public class ActivationBlock : MonoBehaviour
         if (isActive) {
 /*            if (returning)
             {
-                objectToMove.position = Vector3.MoveTowards(objectToMove.position, startPos, moveSpeed);
+                objectToMove.transform.position = Vector3.MoveTowards(objectToMove.transform.position, startPos, moveSpeed);
             }
             else
             {
-                objectToMove.position = Vector3.MoveTowards(objectToMove.position, moveTarget.position, moveSpeed);
+                objectToMove.transform.position = Vector3.MoveTowards(objectToMove.transform.position, moveTarget.position, moveSpeed);
             }*/
-            objectToMove.position = !returning
-                ? Vector3.MoveTowards(objectToMove.position, moveTarget.position, moveSpeed)
-                : Vector3.MoveTowards(objectToMove.position, startPos, moveSpeed);
-            if (objectToMove.position == startPos)
+            objectToMove.transform.position = !returning
+                ? Vector3.MoveTowards(objectToMove.transform.position, moveTarget.position, moveSpeed)
+                : Vector3.MoveTowards(objectToMove.transform.position, startPosition.position, moveSpeed);
+            if (objectToMove.transform.position == startPosition.position)
             {
                 //Debug.Log("At start");
                 returning = false;
                 Deactivate();
             }
-            if (objectToMove.position == moveTarget.position)
+            if (objectToMove.transform.position == moveTarget.position)
             {
-                //Debug.Log("End");
                 returning = true;
+                GetComponent<AudioSource>().Play();
             }
         }
     }
 
     private void OnTriggerEnter(Collider other)
     {
+        // Debug.Log(other.tag);
         if (other.tag == "Egg" && !isActive)
         {
             Activate();
@@ -78,7 +80,7 @@ public class ActivationBlock : MonoBehaviour
         activeObject.SetActive(true);
         inactiveObject.SetActive(false);
         //objectMaterial.color = activeColor;
-        Material[] materials = objectMaterial.GetComponent<Renderer>().materials;
+        Material[] materials = objectToMove.GetComponent<Renderer>().materials;
         materials[0].color = activeColor;
         materials[1].color = secondaryActiveColor;
     }
@@ -90,7 +92,7 @@ public class ActivationBlock : MonoBehaviour
         activeObject.SetActive(false);
         inactiveObject.SetActive(true);
         //objectMaterial.color = startColor;
-        Material[] materials = objectMaterial.GetComponent<Renderer>().materials;
+        Material[] materials = objectToMove.GetComponent<Renderer>().materials;
         materials[0].color = startColor;
         materials[1].color = secondaryStartColor;
     }
