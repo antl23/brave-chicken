@@ -82,7 +82,9 @@ Material:
     m_Ints: []
     m_Floats:
     - Edge_Power: 1
+    - Metallic: 0
     - Mult: 2
+    - Smoothness: 0
     - Strength: 1
     - _AlphaClip: 0
     - _Blend: 0
@@ -114,7 +116,7 @@ Material:
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
-    - Mask: {r: 0.6037736, g: 0.6037736, b: 0.6037736, a: 0}
+    - Mask: {r: 1, g: 1, b: 1, a: 0}
     - RimColor: {r: 0.6941286, g: 0.43787828, b: 0.75471693, a: 0}
     - _BaseColor: {r: 0.6466568, g: 0.4877993, b: 0.26875558, a: 1}
     - _Color: {r: 0.5188679, g: 0.30876032, b: 0.13950694, a: 1}
