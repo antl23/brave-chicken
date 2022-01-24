@@ -3,7 +3,17 @@ guid: 49c963e938b449d46934f6ec4892429d
 ModelImporter:
   serializedVersion: 21100
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Wood
+    second: {fileID: 2100000, guid: 14b188cd78e94460eace51593c85b2e2, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Wood_Light
+    second: {fileID: 2100000, guid: b67f17b9d2baa40ef83d750bc9c63b23, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -45,7 +55,7 @@ ModelImporter:
     importLights: 1
     fileIdsGeneration: 2
     swapUVChannels: 0
-    generateSecondaryUV: 0
+    generateSecondaryUV: 1
     useFileUnits: 1
     keepQuads: 0
     weldVertices: 1
