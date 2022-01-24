@@ -6,6 +6,14 @@ TagManager:
   tags:
   - Boost
   - Target
+  - Sidescroll
+  - Spring
+  - Camera
+  - Spikes
+  - Saw
+  - Undefined
+  - Egg
+  - Platform
   layers:
   - Default
   - TransparentFX
@@ -13,7 +21,7 @@ TagManager:
   - 
   - Water
   - UI
-  - 
+  - Target
   - 
   - 
   - 
