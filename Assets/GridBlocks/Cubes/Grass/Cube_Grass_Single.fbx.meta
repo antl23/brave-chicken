@@ -3,7 +3,27 @@ guid: 31b4a48a1f0c7634ebdf59b0059ca436
 ModelImporter:
   serializedVersion: 21100
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Dirt_1
+    second: {fileID: 2100000, guid: a9d0170078321447d8432e22dacefdb6, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Dirt_2
+    second: {fileID: 2100000, guid: 75b4329357e3a4ba6b28e38f321fc101, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Dirt_3
+    second: {fileID: 2100000, guid: 6a4f2bb41d18d4d279cde565e2c59152, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Green_Light
+    second: {fileID: 2100000, guid: b800ae7cfb6b64ccc8dad6e8084f1787, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -45,7 +65,7 @@ ModelImporter:
     importLights: 1
     fileIdsGeneration: 2
     swapUVChannels: 0
-    generateSecondaryUV: 0
+    generateSecondaryUV: 1
     useFileUnits: 1
     keepQuads: 0
     weldVertices: 1
