@@ -23,6 +23,7 @@ public class Player : MonoBehaviour
     public GameObject shadowObject;
     public float lookSpeed = 20.0f;
     public float lookXLimit = 60.0f;
+    public uint health;
     private bool canDoubleJump = true;
     private bool canDash = true;
     private uint dashTimer = 0;
@@ -291,7 +292,7 @@ public class Player : MonoBehaviour
             shadow.transform.position = Vector3.zero;
         }
     }
-
+/*
     IEnumerator rotateObject(Transform gameObjectToMove, Vector3 eulerAngles, float duration)
     {
         if (rotating)
@@ -312,10 +313,15 @@ public class Player : MonoBehaviour
             yield return null;
         }
         rotating = false;
-    }
+    }*/
 
     void TakeDamage()
     {
+        health--;
         GetComponent<AudioSource>().Play();
+        if (health == 0)
+        {
+            Time.timeScale = 0;
+        }
     }
 }

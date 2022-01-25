@@ -509,6 +509,7 @@ MonoBehaviour:
   shadowObject: {fileID: 6673025715749720733, guid: ff334c001fb301d48b67da44c98ba4bb, type: 3}
   lookSpeed: 50
   lookXLimit: 30
+  health: 3
   canMove: 1
 --- !u!82 &3835281952527496345
 AudioSource:
