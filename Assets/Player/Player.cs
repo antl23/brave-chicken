@@ -286,6 +286,9 @@ public class Player : MonoBehaviour
                      initialShadowScale.y,
                      initialShadowScale.z * scaleFactor
                  );
+        } else
+        {
+            shadow.transform.position = Vector3.zero;
         }
     }
 
