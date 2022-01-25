@@ -113,7 +113,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: 241615916f93dc442a5b00fa48dd002e, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 1474b6e81cc69354fa66256c1252c1be, type: 2}
+      objectReference: {fileID: 2100000, guid: 20b6ac5489cf19b42aaac7f53d5fa6a2, type: 2}
     - target: {fileID: 919132149155446097, guid: 241615916f93dc442a5b00fa48dd002e, type: 3}
       propertyPath: m_Name
       value: hay_bale (5)
@@ -265,7 +265,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: 241615916f93dc442a5b00fa48dd002e, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 1474b6e81cc69354fa66256c1252c1be, type: 2}
+      objectReference: {fileID: 2100000, guid: 20b6ac5489cf19b42aaac7f53d5fa6a2, type: 2}
     - target: {fileID: 919132149155446097, guid: 241615916f93dc442a5b00fa48dd002e, type: 3}
       propertyPath: m_Name
       value: hay_bale (4)
@@ -565,7 +565,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: 241615916f93dc442a5b00fa48dd002e, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 1474b6e81cc69354fa66256c1252c1be, type: 2}
+      objectReference: {fileID: 2100000, guid: 20b6ac5489cf19b42aaac7f53d5fa6a2, type: 2}
     - target: {fileID: 919132149155446097, guid: 241615916f93dc442a5b00fa48dd002e, type: 3}
       propertyPath: m_Name
       value: hay_bale
@@ -643,7 +643,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: 241615916f93dc442a5b00fa48dd002e, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 1474b6e81cc69354fa66256c1252c1be, type: 2}
+      objectReference: {fileID: 2100000, guid: 20b6ac5489cf19b42aaac7f53d5fa6a2, type: 2}
     - target: {fileID: 919132149155446097, guid: 241615916f93dc442a5b00fa48dd002e, type: 3}
       propertyPath: m_Name
       value: hay_bale (1)
@@ -721,7 +721,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: 241615916f93dc442a5b00fa48dd002e, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 1474b6e81cc69354fa66256c1252c1be, type: 2}
+      objectReference: {fileID: 2100000, guid: 20b6ac5489cf19b42aaac7f53d5fa6a2, type: 2}
     - target: {fileID: 919132149155446097, guid: 241615916f93dc442a5b00fa48dd002e, type: 3}
       propertyPath: m_Name
       value: hay_bale (3)
@@ -1243,7 +1243,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: 3f0db882f6fd3744f82a713be1ccb14f, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: b084093ca0181704fa32059fb3ea17cf, type: 2}
+      objectReference: {fileID: 2100000, guid: 91a851afeb4e15046bf08990c3abb5f5, type: 2}
     - target: {fileID: 919132149155446097, guid: 3f0db882f6fd3744f82a713be1ccb14f, type: 3}
       propertyPath: m_Name
       value: barn
@@ -1321,7 +1321,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: 241615916f93dc442a5b00fa48dd002e, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 1474b6e81cc69354fa66256c1252c1be, type: 2}
+      objectReference: {fileID: 2100000, guid: 20b6ac5489cf19b42aaac7f53d5fa6a2, type: 2}
     - target: {fileID: 919132149155446097, guid: 241615916f93dc442a5b00fa48dd002e, type: 3}
       propertyPath: m_Name
       value: hay_bale (2)
