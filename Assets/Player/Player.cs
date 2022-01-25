@@ -20,6 +20,7 @@ public class Player : MonoBehaviour
     public Transform rightCameraPoint;
     public Transform cameraCenter;
     public CameraPosition cameraPosition = CameraPosition.Rear;
+    public GameObject shadowObject;
     public float lookSpeed = 20.0f;
     public float lookXLimit = 60.0f;
     private bool canDoubleJump = true;
@@ -35,6 +36,8 @@ public class Player : MonoBehaviour
     private bool rotating = false;
     private Vector3 startCamPos;
     private float cameraMoveAmount = 0.0f;
+    private GameObject shadow;
+    private Vector3 initialShadowScale;
 
     public bool canMove = true;
 
@@ -50,6 +53,8 @@ public class Player : MonoBehaviour
         // cameraTarget = frontCameraPoint.position;
         // StartCoroutine(rotateObject(cameraTransform, cameraTarget.rotation.eulerAngles, 3f));
         cameraTransform.LookAt(cameraCenter);
+        shadow = Instantiate(shadowObject, transform);
+        initialShadowScale = shadow.transform.localScale;
     }
 
     private void OnCollisionStay(Collision col)
@@ -210,6 +215,7 @@ public class Player : MonoBehaviour
             {
                 canDoubleJump = true;
                 canDash = true;
+                direction.y = 0;
             }
             if (Input.GetButtonDown("Jump"))
             {
@@ -268,6 +274,21 @@ public class Player : MonoBehaviour
                 cameraMoveAmount = 0.0f;
                 cameraTarget = null;
             }
+        }
+        RaycastHit hit;
+        if (Physics.Raycast(transform.position, Vector3.down, out hit, Mathf.Infinity))
+        {
+            shadow.transform.position = hit.point;
+            float scaleFactor = Mathf.Clamp(10 / (hit.distance + 10), 0.2f, 1);
+            shadow.transform.localScale =
+                 new Vector3(
+                     initialShadowScale.x * scaleFactor,
+                     initialShadowScale.y,
+                     initialShadowScale.z * scaleFactor
+                 );
+        } else
+        {
+            shadow.transform.position = Vector3.zero;
         }
     }
 

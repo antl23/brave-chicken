@@ -99,6 +99,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Cube_Grass_Single
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 31b4a48a1f0c7634ebdf59b0059ca436, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 31b4a48a1f0c7634ebdf59b0059ca436, type: 3}
 --- !u!1 &7697168221083758253 stripped
