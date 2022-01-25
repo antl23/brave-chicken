@@ -136,7 +136,7 @@ GameObject:
   - component: {fileID: 3762063578547354556}
   - component: {fileID: 9036896320965196186}
   m_Layer: 0
-  m_Name: High_Half
+  m_Name: High_Side
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
