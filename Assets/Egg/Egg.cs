@@ -6,10 +6,7 @@ public class Egg : MonoBehaviour
 {
     public void Break()
     {
-        // doesn't work
-        Debug.Log(GetComponent<AudioSource>().clip);
         GetComponent<AudioSource>().Play();
-        // End();
         Invoke("End", 5);
     }
 
