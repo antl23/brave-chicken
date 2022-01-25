@@ -37,6 +37,7 @@ public class Player : MonoBehaviour
     private Vector3 startCamPos;
     private float cameraMoveAmount = 0.0f;
     private GameObject shadow;
+    private Vector3 initialShadowScale;
 
     public bool canMove = true;
 
@@ -53,6 +54,7 @@ public class Player : MonoBehaviour
         // StartCoroutine(rotateObject(cameraTransform, cameraTarget.rotation.eulerAngles, 3f));
         cameraTransform.LookAt(cameraCenter);
         shadow = Instantiate(shadowObject, transform);
+        initialShadowScale = shadow.transform.localScale;
     }
 
     private void OnCollisionStay(Collision col)
@@ -213,6 +215,7 @@ public class Player : MonoBehaviour
             {
                 canDoubleJump = true;
                 canDash = true;
+                direction.y = 0;
             }
             if (Input.GetButtonDown("Jump"))
             {
@@ -276,6 +279,13 @@ public class Player : MonoBehaviour
         if (Physics.Raycast(transform.position, Vector3.down, out hit, Mathf.Infinity))
         {
             shadow.transform.position = hit.point;
+            float scaleFactor = Mathf.Clamp(10 / (hit.distance + 10), 0.2f, 1);
+            shadow.transform.localScale =
+                 new Vector3(
+                     initialShadowScale.x * scaleFactor,
+                     initialShadowScale.y,
+                     initialShadowScale.z * scaleFactor
+                 );
         }
     }
 
