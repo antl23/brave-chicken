@@ -15,22 +15,11 @@ public class ActivationBlock : MonoBehaviour
     public Color secondaryActiveColor;
     public float moveSpeed;
     public bool isActive;
-    //public Material objectMaterial;
-    // public GameObject objectMaterial;
     private bool returning;
     private GameObject objectToMove;
-    // private Color startColor;
 
-
-    // Start is called before the first frame update
     void Start()
     {
-        // if (!isActive) Deactivate();
-        // Debug.Log(objectToMove.transform.position + " " + moveTarget.position);
-        // startColor = objectMaterial.color;
-        // startColor = Color.gray; // objectMaterial.color;
-        // objectMaterial.GetComponent<Renderer>().material.color = startColor;
-        //objectMaterial.color = startColor;
         objectToMove = Instantiate(platform, startPosition.transform.position, Quaternion.identity);
     }
 
@@ -38,20 +27,11 @@ public class ActivationBlock : MonoBehaviour
     void FixedUpdate()
     {
         if (isActive) {
-/*            if (returning)
-            {
-                objectToMove.transform.position = Vector3.MoveTowards(objectToMove.transform.position, startPos, moveSpeed);
-            }
-            else
-            {
-                objectToMove.transform.position = Vector3.MoveTowards(objectToMove.transform.position, moveTarget.position, moveSpeed);
-            }*/
             objectToMove.transform.position = !returning
                 ? Vector3.MoveTowards(objectToMove.transform.position, moveTarget.position, moveSpeed)
                 : Vector3.MoveTowards(objectToMove.transform.position, startPosition.position, moveSpeed);
             if (objectToMove.transform.position == startPosition.position)
             {
-                //Debug.Log("At start");
                 returning = false;
                 Deactivate();
             }
@@ -65,7 +45,6 @@ public class ActivationBlock : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        // Debug.Log(other.tag);
         if (other.tag == "Egg" && !isActive)
         {
             Activate();
@@ -79,7 +58,6 @@ public class ActivationBlock : MonoBehaviour
         isActive = true;
         activeObject.SetActive(true);
         inactiveObject.SetActive(false);
-        //objectMaterial.color = activeColor;
         Material[] materials = objectToMove.GetComponent<Renderer>().materials;
         materials[0].color = activeColor;
         materials[1].color = secondaryActiveColor;
@@ -91,7 +69,6 @@ public class ActivationBlock : MonoBehaviour
         isActive = false;
         activeObject.SetActive(false);
         inactiveObject.SetActive(true);
-        //objectMaterial.color = startColor;
         Material[] materials = objectToMove.GetComponent<Renderer>().materials;
         materials[0].color = startColor;
         materials[1].color = secondaryStartColor;

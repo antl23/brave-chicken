@@ -25,19 +25,14 @@ public class Player : MonoBehaviour
     public float lookXLimit = 60.0f;
     public uint health;
     public uint maxIFrames;
+    public GameObject deathMenu;
     private uint iframes;
     public GameObject materialObject;
     private bool canDoubleJump = true;
     private bool canDash = true;
     private uint dashTimer = 0;
     private bool sideScroll = false;
-    // private bool inTrigger = false;
-    private float saveZ;
-    private bool warp = false;
-    private CameraTrigger lastTrigger;
-    private CameraPosition camPos = CameraPosition.Rear;
     private Vector3? cameraTarget;
-    private bool rotating = false;
     private Vector3 startCamPos;
     private float cameraMoveAmount = 0.0f;
     private GameObject shadow;
@@ -54,9 +49,6 @@ public class Player : MonoBehaviour
     {
         characterController = GetComponent<CharacterController>();
         rotation.y = transform.eulerAngles.y;
-        // frontCameraPoint;
-        // cameraTarget = frontCameraPoint.position;
-        // StartCoroutine(rotateObject(cameraTransform, cameraTarget.rotation.eulerAngles, 3f));
         cameraTransform.LookAt(cameraCenter);
         shadow = Instantiate(shadowObject, transform);
         initialShadowScale = shadow.transform.localScale;
@@ -65,7 +57,6 @@ public class Player : MonoBehaviour
 
     private void OnCollisionStay(Collision col)
     {
-        Debug.Log(col.gameObject.tag);
         if (col.gameObject.tag == "Platform")
         {
             transform.position = col.gameObject.transform.position;
@@ -74,7 +65,6 @@ public class Player : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        //Debug.Log(other.tag);
         switch (other.tag)
         {
             case "Platform":
@@ -128,64 +118,12 @@ public class Player : MonoBehaviour
                 TakeDamage();
                 break;
         }
-/*        // Debug.Log(other.tag);
-        if (other.tag == "Boost") {
-            canDoubleJump = true;
-            canDash = true;
-            Destroy(other.gameObject);
-        }
-        CameraTrigger trigger = other.GetComponent<CameraTrigger>();
-        if (other.tag == "Sidescroll" && !inTrigger && trigger != lastTrigger) 
-        {
-            inTrigger = true;
-            GameObject cameraPoint = trigger.cameraPoint;
-            lastTrigger = trigger;
-            camPos = trigger.cameraPosition;
-            Debug.Log("Enter");
-            characterController.enabled = false;
-            characterController.transform.position = new Vector3(other.transform.position.x, transform.position.y, other.transform.position.z);
-            characterController.enabled = true;
-            *//*if (camPos == CameraPosition.Side) {
-                sideScroll = true;
-                Debug.Log("Side");
-                cameraTarget = cameraPoint.transform.position;
-                //cameraTransform.position = cameraPoint.transform.position;
-                //cameraTransform.rotation = Quaternion.LookRotation(new Vector3(transform.position.x, 0, transform.position.z));
-                //cameraTransform.LookAt(transform.position);
-                cameraTransform.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePositionY;
-            } else
-            {
-                Debug.Log("Rear");
-                cameraTarget = cameraPoint.transform.position;
-                cameraTransform.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
-                sideScroll = false;
-            }*//*
-        }
-        if (other.tag == "Spring")
-        {
-            other.gameObject.GetComponent<AudioSource>().Play();
-            direction.y = jumpSpeed * 2;
-            Animator animator = other.gameObject.GetComponent<Animator>();
-            Debug.Log(animator.GetParameter(0));
-            animator.SetTrigger("Bounce");
-            Debug.Log("Bounce");
-        }*/
     }
 
     private void OnTriggerExit(Collider other)
     {
-        // Debug.Log(other.tag);
-        if (other.tag == "Sidescroll")
-        {
-            // inTrigger = false;
-          /*  characterController.enabled = false;
-            transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z);
-            characterController.enabled = true;*/
-            // sideScroll = false;
-        }
         if (other.tag == "Platform")
         {
-            Debug.Log("Platform");
             transform.SetParent(null);
         }
     }
@@ -200,7 +138,7 @@ public class Player : MonoBehaviour
         {
             iframes--;
         }
-        else
+        else if (health > 0)
         {
             materialObject.GetComponent<Renderer>().material.color = initColor;
         }
@@ -257,15 +195,11 @@ public class Player : MonoBehaviour
             {
                 playerAnimator.SetBool("Walk", true);
                 meshTransform.rotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));
-                // meshTransform.rotation *= Quaternion.AngleAxis(180, meshTransform.up);
             }
             else {
                 playerAnimator.SetBool("Walk", false);
             }
 
-            // Apply gravity. Gravity is multiplied by deltaTime twice (once here, and once below
-            // when the moveDirection is multiplied by deltaTime). This is because gravity should be applied
-            // as an acceleration (ms^-2)
             if (dashTimer == 0) {
                 direction.y -= gravity * Time.deltaTime;
             }
@@ -275,26 +209,13 @@ public class Player : MonoBehaviour
                 direction.z = direction.z * -5;
             }
             characterController.Move(direction * Time.deltaTime);
-            // Move the camera
-            // rotation.y += Input.GetAxis("Mouse X") * lookSpeed;
-            // rotation.x += -Input.GetAxis("Mouse Y") * lookSpeed;
-            // rotation.x = Mathf.Clamp(rotation.x, -lookXLimit, lookXLimit);
-            // playerCameraParent.localRotation = Quaternion.Euler(rotation.x, rotation.y, 0);
         }
         if (cameraTarget != null)
         {
-            // float step = Mathf.Range;//lookSpeed * Time.deltaTime;
-           /* Vector3 newPos = Vector3.MoveTowards(cameraTransform.position, cameraTarget.Value, step);
-            if (cameraTransform.position == newPos)
-            {
-                cameraTarget = null;
-                return;
-            }*/
             cameraTransform.localPosition = Vector3.Lerp(startCamPos, cameraTarget.Value, cameraMoveAmount);
             cameraMoveAmount += Time.deltaTime * lookSpeed;
             cameraMoveAmount = Mathf.Clamp(cameraMoveAmount, 0.0f, 1.0f);
             cameraTransform.LookAt(cameraCenter);
-            // cameraTransform.rotation = Quaternion.Lerp()
             if (cameraMoveAmount == 1)
             {
                 cameraTransform.localPosition = cameraTarget.Value;
@@ -318,28 +239,6 @@ public class Player : MonoBehaviour
             shadow.transform.position = Vector3.zero;
         }
     }
-/*
-    IEnumerator rotateObject(Transform gameObjectToMove, Vector3 eulerAngles, float duration)
-    {
-        if (rotating)
-        {
-            yield break;
-        }
-        rotating = true;
-
-        Vector3 newRot = gameObjectToMove.eulerAngles + eulerAngles;
-
-        Vector3 currentRot = gameObjectToMove.eulerAngles;
-
-        float counter = 0;
-        while (counter < duration)
-        {
-            counter += Time.deltaTime;
-            gameObjectToMove.eulerAngles = Vector3.Lerp(currentRot, newRot, counter / duration);
-            yield return null;
-        }
-        rotating = false;
-    }*/
 
     void TakeDamage()
     {
@@ -349,7 +248,9 @@ public class Player : MonoBehaviour
             GetComponent<AudioSource>().Play();
             if (health == 0)
             {
-                Time.timeScale = 0;
+                Time.timeScale = 0.1f;
+                deathMenu.SetActive(true);
+                canMove = false;
             }
             materialObject.GetComponent<Renderer>().material.color = Color.red;
             iframes = maxIFrames;

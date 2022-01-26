@@ -16,12 +16,6 @@ public class CameraTrigger : MonoBehaviour
 
     void Start()
     {
-        // Debug.Log("Test");
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
+        
     }
 }

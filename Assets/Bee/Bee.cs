@@ -46,7 +46,6 @@ public class Bee : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        // Debug.Log(other.tag);
         if (other.tag == "Egg")
         {
             dead = true;
@@ -56,7 +55,6 @@ public class Bee : MonoBehaviour
             GetComponent<Animator>().SetTrigger("Death");
             gameObject.tag = "Untagged"; // wont hurt player
             Invoke("End", 2);
-            // GetComponent<AudioSource>().Play();
         }
     }
 

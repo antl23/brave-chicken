@@ -14,7 +14,7 @@ public class UI : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (player.health > 0 && Input.GetKeyDown(KeyCode.Escape))
         {
             if (paused) {
                 Resume();
@@ -22,6 +22,10 @@ public class UI : MonoBehaviour
             {
                 Pause();
             }
+        }
+        if (player.health == 0)
+        {
+            ShowCursor();
         }
     }
 

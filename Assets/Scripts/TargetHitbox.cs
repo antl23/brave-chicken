@@ -20,32 +20,23 @@ public class TargetHitbox : MonoBehaviour
 
     private void OnTriggerEnter(Collider collider)
     {
-        //Debug.Log(collider.gameObject.tag);
         if (collider.gameObject.layer == LayerMask.NameToLayer("Target"))
         {
             bool targetChanged = false;
             targetsInView.Add(collider.gameObject);
             float distance = Vector3.Distance(armTransform.position, collider.gameObject.transform.position);
-            // Debug.Log(distance + "   " + mainTargetDistence);
             if (distance < mainTargetDistence)
             {
                 targetChanged = true;
                 mainTarget = collider.gameObject;
                 mainTargetDistence = distance;
             }
-           /* RaycastHit[] hits;
-            hits = Physics.RaycastAll(armTransform.position, (collider.transform.position - armTransform.position), Mathf.Infinity);
-            */if (targetChanged)
+            if (targetChanged)
             {
                 Destroy(currentParticleSys);
                 RaycastHit hit;
-                //Debug.DrawRay(armTransform.position, (mainTarget.transform.position - armTransform.position), Color.red, 5);
                 if (Physics.Raycast(armTransform.position, (mainTarget.transform.position - armTransform.position), out hit, Mathf.Infinity, LayerMask.GetMask("Target")))
                 {
-                    //Debug.DrawRay(armTransform.position, (hit.point - armTransform.position), Color.blue, 5);
-                    //Debug.Log(mainTarget.transform.position + " vs " + hit.point);
-                    //Debug.DrawRay(armTransform.position, (hit.transform.position - armTransform.position), Color.red, 5);
-                    // doesn't work (wrong spot)
                     currentParticleSys = Instantiate(particleSys, hit.point, new Quaternion(), mainTarget.transform);
                     currentParticleSys.transform.LookAt(new Vector3(armTransform.position.x, armTransform.position.y, armTransform.position.z));
                 }
@@ -58,7 +49,6 @@ public class TargetHitbox : MonoBehaviour
         RaycastHit hit;
         if (collider != null && collider.gameObject.layer == LayerMask.NameToLayer("Target"))
         {
-            targetsInView.Remove(collider.gameObject);
             Debug.Log("lost main target" + targetsInView.Count);
             mainTarget = targetsInView.Count > 0 ? targetsInView[0] : null;
             if (mainTarget == null)
@@ -83,14 +73,6 @@ public class TargetHitbox : MonoBehaviour
             Vector3 position = armTransform.position;
             Vector3 point = new Vector3(position.x, position.y + heighOffset, position.z);
             currProjectile = Instantiate(projectile, point, armTransform.rotation);
-
-
-
-
-
-
-
-
             currTarget = mainTarget;
             GetComponent<AudioSource>().Play();
        }

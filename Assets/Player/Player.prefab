@@ -510,8 +510,9 @@ MonoBehaviour:
   shadowObject: {fileID: 6673025715749720733, guid: ff334c001fb301d48b67da44c98ba4bb, type: 3}
   lookSpeed: 2
   lookXLimit: 30
-  health: 50
+  health: 3
   maxIFrames: 30
+  deathMenu: {fileID: 0}
   materialObject: {fileID: 7487538856628265111}
   canMove: 1
 --- !u!82 &3835281952527496345
