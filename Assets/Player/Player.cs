@@ -24,6 +24,9 @@ public class Player : MonoBehaviour
     public float lookSpeed = 20.0f;
     public float lookXLimit = 60.0f;
     public uint health;
+    public uint maxIFrames;
+    private uint iframes;
+    public GameObject materialObject;
     private bool canDoubleJump = true;
     private bool canDash = true;
     private uint dashTimer = 0;
@@ -39,6 +42,7 @@ public class Player : MonoBehaviour
     private float cameraMoveAmount = 0.0f;
     private GameObject shadow;
     private Vector3 initialShadowScale;
+    private Color initColor;
 
     public bool canMove = true;
 
@@ -56,6 +60,7 @@ public class Player : MonoBehaviour
         cameraTransform.LookAt(cameraCenter);
         shadow = Instantiate(shadowObject, transform);
         initialShadowScale = shadow.transform.localScale;
+        initColor = materialObject.GetComponent<Renderer>().material.color;
     }
 
     private void OnCollisionStay(Collision col)
@@ -191,6 +196,14 @@ public class Player : MonoBehaviour
         {
             dashTimer--;
         }
+        if (iframes > 0)
+        {
+            iframes--;
+        }
+        else
+        {
+            materialObject.GetComponent<Renderer>().material.color = initColor;
+        }
     }
 
     void Update()
@@ -255,6 +268,11 @@ public class Player : MonoBehaviour
             // as an acceleration (ms^-2)
             if (dashTimer == 0) {
                 direction.y -= gravity * Time.deltaTime;
+            }
+            if (iframes > maxIFrames - 3)
+            {
+                direction.x = direction.x * -5;
+                direction.z = direction.z * -5;
             }
             characterController.Move(direction * Time.deltaTime);
             // Move the camera
@@ -325,11 +343,16 @@ public class Player : MonoBehaviour
 
     void TakeDamage()
     {
-        health--;
-        GetComponent<AudioSource>().Play();
-        if (health == 0)
+        if (iframes == 0)
         {
-            Time.timeScale = 0;
+            health--;
+            GetComponent<AudioSource>().Play();
+            if (health == 0)
+            {
+                Time.timeScale = 0;
+            }
+            materialObject.GetComponent<Renderer>().material.color = Color.red;
+            iframes = maxIFrames;
         }
     }
 }

@@ -510,7 +510,9 @@ MonoBehaviour:
   shadowObject: {fileID: 6673025715749720733, guid: ff334c001fb301d48b67da44c98ba4bb, type: 3}
   lookSpeed: 2
   lookXLimit: 30
-  health: 3
+  health: 50
+  maxIFrames: 30
+  materialObject: {fileID: 7487538856628265111}
   canMove: 1
 --- !u!82 &3835281952527496345
 AudioSource:
@@ -1385,6 +1387,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b446598420f7a56468f3585457c8e33c, type: 3}
+--- !u!1 &7487538856628265111 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -3096684760249510411, guid: b446598420f7a56468f3585457c8e33c, type: 3}
+  m_PrefabInstance: {fileID: 3670232989477205346}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &3847745374647751305 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: b446598420f7a56468f3585457c8e33c, type: 3}
