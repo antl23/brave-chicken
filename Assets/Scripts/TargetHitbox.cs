@@ -49,8 +49,10 @@ public class TargetHitbox : MonoBehaviour
         RaycastHit hit;
         if (collider != null && collider.gameObject.layer == LayerMask.NameToLayer("Target"))
         {
-            Debug.Log("lost main target" + targetsInView.Count);
+            targetsInView.Remove(collider.gameObject);
+            Debug.Log("count: " + targetsInView.Count + ", name: " + (targetsInView.Count > 0 ? targetsInView[0]?.name : null));
             mainTarget = targetsInView.Count > 0 ? targetsInView[0] : null;
+            if (mainTarget != null) Debug.DrawRay(armTransform.position, mainTarget.transform.position, Color.green, 5);
             if (mainTarget == null)
             {
                 mainTargetDistence = Mathf.Infinity;
@@ -58,6 +60,7 @@ public class TargetHitbox : MonoBehaviour
                 currentParticleSys = null;
             } else if (Physics.Raycast(armTransform.position, mainTarget.transform.position, out hit, Mathf.Infinity))
             {
+                Debug.DrawRay(armTransform.position, mainTarget.transform.position, Color.red, 5);
                 Destroy(currentParticleSys);
                 currentParticleSys = Instantiate(particleSys, hit.point, new Quaternion(), mainTarget.transform);
                 mainTargetDistence = hit.distance;
