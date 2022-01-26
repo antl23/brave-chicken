@@ -9,7 +9,7 @@ public class Spawner : MonoBehaviour
     public GameObject existingObject;
     public uint spawnDelay = 360;
     private uint spawnTimer = 0;
-    private bool justSpawned = false;
+    private bool justSpawned = true;
 
     // Update is called once per frame
     void Update()
@@ -22,7 +22,6 @@ public class Spawner : MonoBehaviour
                 justSpawned = true;
             } else 
             {
-                Debug.Log(spawnTimer);
                 spawnTimer--;
             }
         } else if (justSpawned)

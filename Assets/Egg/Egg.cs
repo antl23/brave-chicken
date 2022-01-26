@@ -7,11 +7,6 @@ public class Egg : MonoBehaviour
     public void Break()
     {
         GetComponent<AudioSource>().Play();
-        Invoke("End", 5);
-    }
-
-    void End()
-    {
         Destroy(gameObject);
     }
 

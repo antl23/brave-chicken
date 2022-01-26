@@ -110,6 +110,7 @@ public class Player : MonoBehaviour
             case "Spring":
                 other.gameObject.GetComponent<AudioSource>().Play();
                 direction.y = jumpSpeed * 2;
+                dashTimer = 0;
                 Animator animator = other.gameObject.GetComponent<Animator>();
                 animator.SetTrigger("Bounce");
                 break;
@@ -184,6 +185,14 @@ public class Player : MonoBehaviour
         }
     }
 
+    private void FixedUpdate()
+    {
+        if (canMove && dashTimer > 0)
+        {
+            dashTimer--;
+        }
+    }
+
     void Update()
     {
         if (!characterController.isGrounded) {
@@ -204,7 +213,6 @@ public class Player : MonoBehaviour
                 canDash = false;
             }
             if (dashTimer > 0) {
-                dashTimer--;
                 if (dashTimer > dashDelay) { 
                     curSpeedZ *= dashMultiplier;
                     curSpeedX *= dashMultiplier;

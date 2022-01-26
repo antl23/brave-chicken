@@ -18,7 +18,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &6042717835254682069
 Transform:
   m_ObjectHideFlags: 0
@@ -105,11 +105,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2662102094771979008}
-  - component: {fileID: 7133365906094588421}
   - component: {fileID: 8971356130881509709}
   - component: {fileID: 6498344867804118286}
   - component: {fileID: 4315309627123960594}
   - component: {fileID: 803868686476190180}
+  - component: {fileID: 8408655249357885060}
   m_Layer: 0
   m_Name: GameObject
   m_TagString: Untagged
@@ -124,26 +124,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1466089324915421082}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.5, z: 2.3}
-  m_LocalScale: {x: 1.5, y: 2.5, z: 4}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
+  m_LocalPosition: {x: 0, y: 0.2, z: 7.7}
+  m_LocalScale: {x: 8, y: 8, z: 15}
   m_Children: []
   m_Father: {fileID: 3847745374647751305}
   m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &7133365906094588421
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1466089324915421082}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!114 &8971356130881509709
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -168,7 +155,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1466089324915421082}
-  m_Enabled: 0
+  m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -210,7 +197,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1466089324915421082}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+  m_Mesh: {fileID: -4432124805086160128, guid: e1da1bca0b98da24c91fe7112775ad59, type: 3}
 --- !u!82 &803868686476190180
 AudioSource:
   m_ObjectHideFlags: 0
@@ -307,6 +294,20 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!64 &8408655249357885060
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1466089324915421082}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -4432124805086160128, guid: e1da1bca0b98da24c91fe7112775ad59, type: 3}
 --- !u!95 &240893346401771578
 Animator:
   serializedVersion: 3
@@ -492,11 +493,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 7
-  jumpSpeed: 7
-  dashMultiplier: 3
-  dashLength: 120
-  dashDelay: 120
-  gravity: 10
+  jumpSpeed: 9
+  dashMultiplier: 2
+  dashLength: 20
+  dashDelay: 5
+  gravity: 12
   cameraTransform: {fileID: 3983191526760688489}
   meshTransform: {fileID: 3847745374647751305}
   playerAnimator: {fileID: 5343386447883480582}
@@ -507,7 +508,7 @@ MonoBehaviour:
   cameraCenter: {fileID: 4921674600441058619}
   cameraPosition: 1
   shadowObject: {fileID: 6673025715749720733, guid: ff334c001fb301d48b67da44c98ba4bb, type: 3}
-  lookSpeed: 50
+  lookSpeed: 2
   lookXLimit: 30
   health: 3
   canMove: 1
@@ -865,7 +866,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &4049044682452714719
 Transform:
   m_ObjectHideFlags: 0
@@ -1054,7 +1055,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &8702152151789293071
 Transform:
   m_ObjectHideFlags: 0
@@ -1150,7 +1151,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &4531038209907715196
 Transform:
   m_ObjectHideFlags: 0

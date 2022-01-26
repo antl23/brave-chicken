@@ -14,20 +14,20 @@ public class TargetHitbox : MonoBehaviour
     private GameObject currentParticleSys;
     private Egg currProjectile;
     private List<GameObject> targetsInView = new List<GameObject>();
-    private float mainTargetDistence = 0f;
+    private float mainTargetDistence = Mathf.Infinity;
     private GameObject currTarget;
     
 
     private void OnTriggerEnter(Collider collider)
     {
         //Debug.Log(collider.gameObject.tag);
-        if (collider.gameObject.tag == "Target")
+        if (collider.gameObject.layer == LayerMask.NameToLayer("Target"))
         {
             bool targetChanged = false;
             targetsInView.Add(collider.gameObject);
             float distance = Vector3.Distance(armTransform.position, collider.gameObject.transform.position);
             // Debug.Log(distance + "   " + mainTargetDistence);
-            if (distance > mainTargetDistence)
+            if (distance < mainTargetDistence)
             {
                 targetChanged = true;
                 mainTarget = collider.gameObject;
@@ -46,7 +46,7 @@ public class TargetHitbox : MonoBehaviour
                     //Debug.Log(mainTarget.transform.position + " vs " + hit.point);
                     //Debug.DrawRay(armTransform.position, (hit.transform.position - armTransform.position), Color.red, 5);
                     // doesn't work (wrong spot)
-                    currentParticleSys = Instantiate(particleSys, hit.point, new Quaternion());
+                    currentParticleSys = Instantiate(particleSys, hit.point, new Quaternion(), mainTarget.transform);
                     currentParticleSys.transform.LookAt(new Vector3(armTransform.position.x, armTransform.position.y, armTransform.position.z));
                 }
             }
@@ -55,16 +55,24 @@ public class TargetHitbox : MonoBehaviour
 
     private void OnTriggerExit(Collider collider)
     {
-        if (collider.gameObject.tag == "Target")
+        RaycastHit hit;
+        if (collider != null && collider.gameObject.layer == LayerMask.NameToLayer("Target"))
         {
             targetsInView.Remove(collider.gameObject);
-            if (collider.gameObject == mainTarget)
+            Debug.Log("lost main target" + targetsInView.Count);
+            mainTarget = targetsInView.Count > 0 ? targetsInView[0] : null;
+            if (mainTarget == null)
             {
-                mainTarget = null;
-                mainTargetDistence = 0f;
+                mainTargetDistence = Mathf.Infinity;
                 Destroy(currentParticleSys);
                 currentParticleSys = null;
+            } else if (Physics.Raycast(armTransform.position, mainTarget.transform.position, out hit, Mathf.Infinity))
+            {
+                Destroy(currentParticleSys);
+                currentParticleSys = Instantiate(particleSys, hit.point, new Quaternion(), mainTarget.transform);
+                mainTargetDistence = hit.distance;
             }
+            
         }
     }
 
