@@ -26,6 +26,7 @@ public class Player : MonoBehaviour
     public uint health;
     public uint maxIFrames;
     public GameObject deathMenu;
+    public ParticleSystem smokeSys;
     private uint iframes;
     public GameObject materialObject;
     private bool canDoubleJump = true;
@@ -108,6 +109,7 @@ public class Player : MonoBehaviour
                 direction.y = jumpSpeed * 2;
                 dashTimer = 0;
                 canDoubleJump = true;
+                canDash = true;
                 Animator animator = other.gameObject.GetComponent<Animator>();
                 animator.SetTrigger("Bounce");
                 break;
@@ -175,6 +177,7 @@ public class Player : MonoBehaviour
             {
                 dashTimer = dashLength + dashDelay;
                 canDash = false;
+                smokeSys.Play();
             }
             if (dashTimer > 0) {
                 if (dashTimer > dashDelay) { 
