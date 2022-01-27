@@ -38,6 +38,7 @@ public class Player : MonoBehaviour
     private GameObject shadow;
     private Vector3 initialShadowScale;
     private Color initColor;
+    private Vector3 lastGroundedPoint;
 
     public bool canMove = true;
 
@@ -106,6 +107,7 @@ public class Player : MonoBehaviour
                 other.gameObject.GetComponent<AudioSource>().Play();
                 direction.y = jumpSpeed * 2;
                 dashTimer = 0;
+                canDoubleJump = true;
                 Animator animator = other.gameObject.GetComponent<Animator>();
                 animator.SetTrigger("Bounce");
                 break;
@@ -116,6 +118,16 @@ public class Player : MonoBehaviour
                 break;
             case "Saw":
                 TakeDamage();
+                break;
+            case "KillBox":
+                TakeDamage();
+                if (health > 0)
+                {
+                    direction = Vector3.zero;
+                    characterController.enabled = false;
+                    transform.position = new Vector3(lastGroundedPoint.x, lastGroundedPoint.y + 1, lastGroundedPoint.z);
+                    characterController.enabled = true;
+                }
                 break;
         }
     }
@@ -151,6 +163,7 @@ public class Player : MonoBehaviour
         } else
         {
             playerAnimator.SetBool("InAir", false);
+            lastGroundedPoint = transform.position;
         }
         if (canMove)
         {
@@ -208,6 +221,7 @@ public class Player : MonoBehaviour
                 direction.x = direction.x * -5;
                 direction.z = direction.z * -5;
             }
+
             characterController.Move(direction * Time.deltaTime);
         }
         if (cameraTarget != null)

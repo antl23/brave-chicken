@@ -50,17 +50,14 @@ public class TargetHitbox : MonoBehaviour
         if (collider != null && collider.gameObject.layer == LayerMask.NameToLayer("Target"))
         {
             targetsInView.Remove(collider.gameObject);
-            Debug.Log("count: " + targetsInView.Count + ", name: " + (targetsInView.Count > 0 ? targetsInView[0]?.name : null));
             mainTarget = targetsInView.Count > 0 ? targetsInView[0] : null;
-            if (mainTarget != null) Debug.DrawRay(armTransform.position, mainTarget.transform.position, Color.green, 5);
             if (mainTarget == null)
             {
                 mainTargetDistence = Mathf.Infinity;
                 Destroy(currentParticleSys);
                 currentParticleSys = null;
-            } else if (Physics.Raycast(armTransform.position, mainTarget.transform.position, out hit, Mathf.Infinity))
+            } else if (Physics.Raycast(armTransform.position, (mainTarget.transform.position - armTransform.position), out hit, Mathf.Infinity))
             {
-                Debug.DrawRay(armTransform.position, mainTarget.transform.position, Color.red, 5);
                 Destroy(currentParticleSys);
                 currentParticleSys = Instantiate(particleSys, hit.point, new Quaternion(), mainTarget.transform);
                 mainTargetDistence = hit.distance;
