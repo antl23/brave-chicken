@@ -173,11 +173,12 @@ public class Player : MonoBehaviour
             Vector3 right = new Vector3(cameraTransform.transform.right.x, 0, cameraTransform.transform.right.z);
             float curSpeedX = sideScroll ? 0 : speed * Input.GetAxis("Vertical");
             float curSpeedZ = speed * Input.GetAxis("Horizontal");
-            if (Input.GetButtonDown("Fire3") && canDash)
+            if (Input.GetButtonDown("Fire3") && canDash && (curSpeedZ != 0 || curSpeedX != 0))
             {
                 dashTimer = dashLength + dashDelay;
                 canDash = false;
                 smokeSys.Play();
+                GetComponents<AudioSource>()[1].Play();
             }
             if (dashTimer > 0) {
                 if (dashTimer > dashDelay) { 
