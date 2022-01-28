@@ -56,7 +56,7 @@ public class TargetHitbox : MonoBehaviour
                 mainTargetDistence = Mathf.Infinity;
                 Destroy(currentParticleSys);
                 currentParticleSys = null;
-            } else if (Physics.Raycast(armTransform.position, (mainTarget.transform.position - armTransform.position), out hit, Mathf.Infinity))
+            } else if (Physics.Raycast(armTransform.position, (mainTarget.transform.position - armTransform.position), out hit, Mathf.Infinity, LayerMask.GetMask("Target")))
             {
                 Destroy(currentParticleSys);
                 currentParticleSys = Instantiate(particleSys, hit.point, new Quaternion(), mainTarget.transform);

@@ -27,6 +27,7 @@ public class Player : MonoBehaviour
     public uint maxIFrames;
     public GameObject deathMenu;
     public ParticleSystem smokeSys;
+    public ParticleSystem bloodSys;
     private uint iframes;
     public GameObject materialObject;
     private bool canDoubleJump = true;
@@ -162,7 +163,9 @@ public class Player : MonoBehaviour
     {
         if (!characterController.isGrounded) {
             playerAnimator.SetBool("InAir", true);
-        } else
+            GetComponents<AudioSource>()[3].Stop();
+        }
+        else
         {
             playerAnimator.SetBool("InAir", false);
             lastGroundedPoint = transform.position;
@@ -200,9 +203,11 @@ public class Player : MonoBehaviour
                 {
                     canDoubleJump = false;
                     direction.y = jumpSpeed;
+                    GetComponents<AudioSource>()[2].Play();
                 }
                 else if (characterController.isGrounded) { 
                     direction.y = jumpSpeed;
+                    GetComponents<AudioSource>()[2].Play();
                 }
             }
 
@@ -211,10 +216,13 @@ public class Player : MonoBehaviour
             if (Input.GetAxis("Vertical") != 0f || Input.GetAxis("Horizontal") != 0f)
             {
                 playerAnimator.SetBool("Walk", true);
+                AudioSource walkSound = GetComponents<AudioSource>()[3];
+                if (!walkSound.isPlaying) walkSound.PlayDelayed(.5f);
                 meshTransform.rotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));
             }
             else {
                 playerAnimator.SetBool("Walk", false);
+                GetComponents<AudioSource>()[3].Stop();
             }
 
             if (dashTimer == 0) {
@@ -272,6 +280,7 @@ public class Player : MonoBehaviour
             }
             materialObject.GetComponent<Renderer>().material.color = Color.red;
             iframes = maxIFrames;
+            bloodSys.Play();
         }
     }
 }
