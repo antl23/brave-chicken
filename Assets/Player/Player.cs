@@ -26,6 +26,8 @@ public class Player : MonoBehaviour
     public uint health;
     public uint maxIFrames;
     public GameObject deathMenu;
+    public ParticleSystem smokeSys;
+    public ParticleSystem bloodSys;
     private uint iframes;
     public GameObject materialObject;
     private bool canDoubleJump = true;
@@ -38,6 +40,7 @@ public class Player : MonoBehaviour
     private GameObject shadow;
     private Vector3 initialShadowScale;
     private Color initColor;
+    private Vector3 lastGroundedPoint;
 
     public bool canMove = true;
 
@@ -106,6 +109,8 @@ public class Player : MonoBehaviour
                 other.gameObject.GetComponent<AudioSource>().Play();
                 direction.y = jumpSpeed * 2;
                 dashTimer = 0;
+                canDoubleJump = true;
+                canDash = true;
                 Animator animator = other.gameObject.GetComponent<Animator>();
                 animator.SetTrigger("Bounce");
                 break;
@@ -116,6 +121,16 @@ public class Player : MonoBehaviour
                 break;
             case "Saw":
                 TakeDamage();
+                break;
+            case "KillBox":
+                TakeDamage();
+                if (health > 0)
+                {
+                    direction = Vector3.zero;
+                    characterController.enabled = false;
+                    transform.position = new Vector3(lastGroundedPoint.x, lastGroundedPoint.y + 1, lastGroundedPoint.z);
+                    characterController.enabled = true;
+                }
                 break;
         }
     }
@@ -148,9 +163,12 @@ public class Player : MonoBehaviour
     {
         if (!characterController.isGrounded) {
             playerAnimator.SetBool("InAir", true);
-        } else
+            GetComponents<AudioSource>()[3].Stop();
+        }
+        else
         {
             playerAnimator.SetBool("InAir", false);
+            lastGroundedPoint = transform.position;
         }
         if (canMove)
         {
@@ -158,10 +176,12 @@ public class Player : MonoBehaviour
             Vector3 right = new Vector3(cameraTransform.transform.right.x, 0, cameraTransform.transform.right.z);
             float curSpeedX = sideScroll ? 0 : speed * Input.GetAxis("Vertical");
             float curSpeedZ = speed * Input.GetAxis("Horizontal");
-            if (Input.GetButtonDown("Fire3") && canDash)
+            if (Input.GetButtonDown("Fire3") && canDash && (curSpeedZ != 0 || curSpeedX != 0))
             {
                 dashTimer = dashLength + dashDelay;
                 canDash = false;
+                smokeSys.Play();
+                GetComponents<AudioSource>()[1].Play();
             }
             if (dashTimer > 0) {
                 if (dashTimer > dashDelay) { 
@@ -183,9 +203,11 @@ public class Player : MonoBehaviour
                 {
                     canDoubleJump = false;
                     direction.y = jumpSpeed;
+                    GetComponents<AudioSource>()[2].Play();
                 }
                 else if (characterController.isGrounded) { 
                     direction.y = jumpSpeed;
+                    GetComponents<AudioSource>()[2].Play();
                 }
             }
 
@@ -194,10 +216,13 @@ public class Player : MonoBehaviour
             if (Input.GetAxis("Vertical") != 0f || Input.GetAxis("Horizontal") != 0f)
             {
                 playerAnimator.SetBool("Walk", true);
+                AudioSource walkSound = GetComponents<AudioSource>()[3];
+                if (!walkSound.isPlaying) walkSound.PlayDelayed(.5f);
                 meshTransform.rotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));
             }
             else {
                 playerAnimator.SetBool("Walk", false);
+                GetComponents<AudioSource>()[3].Stop();
             }
 
             if (dashTimer == 0) {
@@ -208,6 +233,7 @@ public class Player : MonoBehaviour
                 direction.x = direction.x * -5;
                 direction.z = direction.z * -5;
             }
+
             characterController.Move(direction * Time.deltaTime);
         }
         if (cameraTarget != null)
@@ -254,6 +280,7 @@ public class Player : MonoBehaviour
             }
             materialObject.GetComponent<Renderer>().material.color = Color.red;
             iframes = maxIFrames;
+            bloodSys.Play();
         }
     }
 }

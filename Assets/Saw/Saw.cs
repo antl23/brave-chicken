@@ -19,7 +19,7 @@ public class Saw : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (Time.timeScale == 1)
+        if (Time.timeScale > 0)
         {
             transform.position = Vector3.MoveTowards(transform.position, returning ? start.position : end.position, moveRate);
             if (transform.position == start.position)

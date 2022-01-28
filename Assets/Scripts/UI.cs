@@ -6,7 +6,7 @@ public class UI : MonoBehaviour
     public static bool paused = false;
     public GameObject overlay;
     public Player player;
-
+    public GameObject controls;
     private void Start()
     {
         HideCursor();
@@ -63,7 +63,14 @@ public class UI : MonoBehaviour
 
     public void Controls()
     {
+        overlay.SetActive(false);
+        controls.SetActive(true);
+    }
 
+    public void CloseControls()
+    {
+        overlay.SetActive(true);
+        controls.SetActive(false);
     }
 
     public void Restart()

@@ -4,9 +4,18 @@ using UnityEngine;
 
 public class Egg : MonoBehaviour
 {
+
+    public ParticleSystem splatter;
+
     public void Break()
     {
         GetComponent<AudioSource>().Play();
+        splatter.Play();
+        Invoke("End", .5f);
+    }
+
+    public void End()
+    {
         Destroy(gameObject);
     }
 
