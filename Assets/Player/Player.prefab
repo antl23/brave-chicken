@@ -515,7 +515,7 @@ MonoBehaviour:
   shadowObject: {fileID: 6673025715749720733, guid: ff334c001fb301d48b67da44c98ba4bb, type: 3}
   lookSpeed: 2
   lookXLimit: 30
-  health: 50
+  health: 3
   maxIFrames: 90
   deathMenu: {fileID: 0}
   smokeSys: {fileID: 436978631826369132}
