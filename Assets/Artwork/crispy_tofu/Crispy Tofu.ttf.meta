@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 9941470c63a26d945aedd94c79abeb9f
+guid: 3b8d8e4285d505040bf50b474cf63a4e
 TrueTypeFontImporter:
   externalObjects: {}
   serializedVersion: 4
@@ -11,7 +11,7 @@ TrueTypeFontImporter:
   fontNames:
   - Crispy Tofu
   fallbackFontReferences:
-  - {fileID: 12800000, guid: 93e56e8a5c5c5824680d81a4b5db0a95, type: 3}
+  - {fileID: 12800000, guid: 404c7bb02193ecd4a827de88d0263ae9, type: 3}
   customCharacters: 
   fontRenderingMode: 0
   ascentCalculationMode: 1
