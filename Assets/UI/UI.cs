@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class UI : MonoBehaviour
 {
@@ -7,6 +8,9 @@ public class UI : MonoBehaviour
     public GameObject overlay;
     public Player player;
     public GameObject controls;
+    public Image muteButton;
+    public Slider slider;
+
     private void Start()
     {
         HideCursor();
@@ -14,7 +18,7 @@ public class UI : MonoBehaviour
 
     private void Update()
     {
-        if (player.health > 0 && Input.GetKeyDown(KeyCode.Escape))
+        if (!paused && player.finished == false && player.health > 0 && Input.GetKeyDown(KeyCode.Escape))
         {
             if (paused) {
                 Resume();
@@ -23,10 +27,12 @@ public class UI : MonoBehaviour
                 Pause();
             }
         }
-        if (player.health == 0)
+        if (player.health == 0 || player.finished)
         {
             ShowCursor();
         }
+        if (slider != null) AudioListener.volume = slider.value;
+        if (muteButton != null)  muteButton.color = AudioListener.volume > 0 ? Color.white : Color.red;
     }
 
     private void ShowCursor()
@@ -83,5 +89,10 @@ public class UI : MonoBehaviour
     {
         Debug.Log("Quit");
         Application.Quit();
+    }
+
+    public void toggleMute()
+    {
+        slider.value = slider.value == 0 ? 1 : 0;
     }
 }

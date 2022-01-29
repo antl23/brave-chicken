@@ -26,10 +26,12 @@ public class Player : MonoBehaviour
     public uint health;
     public uint maxIFrames;
     public GameObject deathMenu;
+    public GameObject victoryMenu;
     public ParticleSystem smokeSys;
     public ParticleSystem bloodSys;
-    private uint iframes;
     public GameObject materialObject;
+    public bool finished;
+    private uint iframes;
     private bool canDoubleJump = true;
     private bool canDash = true;
     private uint dashTimer = 0;
@@ -55,7 +57,8 @@ public class Player : MonoBehaviour
         cameraTransform.LookAt(cameraCenter);
         shadow = Instantiate(shadowObject, transform);
         initialShadowScale = shadow.transform.localScale;
-        initColor = materialObject.GetComponent<Renderer>().material.color;
+        initColor = materialObject.GetComponent<Renderer>().material.GetColor("RimColor");
+        //Debug.Log(materialObject.GetComponent<Renderer>().material.GetColor("RimColor"));
     }
 
     private void OnCollisionStay(Collision col)
@@ -132,6 +135,12 @@ public class Player : MonoBehaviour
                     characterController.enabled = true;
                 }
                 break;
+            case "Victory":
+                finished = true;
+                Time.timeScale = 0.1f;
+                victoryMenu.SetActive(true);
+                canMove = false;
+                break;
         }
     }
 
@@ -155,7 +164,7 @@ public class Player : MonoBehaviour
         }
         else if (health > 0)
         {
-            materialObject.GetComponent<Renderer>().material.color = initColor;
+            materialObject.GetComponent<Renderer>().material.SetColor("RimColor", initColor);
         }
     }
 
@@ -278,7 +287,7 @@ public class Player : MonoBehaviour
                 deathMenu.SetActive(true);
                 canMove = false;
             }
-            materialObject.GetComponent<Renderer>().material.color = Color.red;
+            materialObject.GetComponent<Renderer>().material.SetColor("RimColor", Color.red);
             iframes = maxIFrames;
             bloodSys.Play();
         }

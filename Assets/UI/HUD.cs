@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,7 +13,9 @@ public class HUD : MonoBehaviour
     public Player player;
     public float spriteWidth;
     public float spriteHeight;
+    public TextMeshProUGUI text;
     private List<GameObject> sprites = new List<GameObject>();
+    private float timer = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -39,6 +43,17 @@ public class HUD : MonoBehaviour
             GameObject spriteToRemove = sprites[sprites.Count - 1];
             sprites.Remove(spriteToRemove);
             Destroy(spriteToRemove);
+        }
+    }
+
+    private void FixedUpdate()
+    {
+        if (Time.timeScale == 1)
+        {
+            timer += Time.fixedDeltaTime;
+            // text.text = timer / 60 + ":" + timer % 60;
+            TimeSpan timeSpan = TimeSpan.FromSeconds(timer);
+            text.text = String.Format("{0:0}:{1:00}", timeSpan.Minutes, timeSpan.Seconds);
         }
     }
 }
