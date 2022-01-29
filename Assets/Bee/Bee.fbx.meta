@@ -15,7 +15,37 @@ ModelImporter:
   - first:
       74: 6936222140302613368
     second: MonsterArmature|HitRecieve
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Eyes
+    second: {fileID: 2100000, guid: 6234207f88560c54cba08a96c4f141d9, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Main
+    second: {fileID: 2100000, guid: f955694656d3de748adcc607217e8320, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Main_2
+    second: {fileID: 2100000, guid: c5af4afdabc62dd41b80a87902bfbffa, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Teeth
+    second: {fileID: 2100000, guid: 92445fd4f0dca944a89298dd6070165e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Tongue
+    second: {fileID: 2100000, guid: f416ee170715288418f6fd59136e43ff, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Wings
+    second: {fileID: 2100000, guid: f4597e314d1ad7a46b45ebdaa46fa2ca, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

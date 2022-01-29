@@ -15,6 +15,7 @@ TagManager:
   - Egg
   - KillBox
   - Platform
+  - Victory
   layers:
   - Default
   - TransparentFX

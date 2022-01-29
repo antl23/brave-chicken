@@ -25,12 +25,12 @@ public class Saw : MonoBehaviour
             if (transform.position == start.position)
             {
                 returning = false;
-                GetComponent<AudioSource>().Play();
+                GetComponents<AudioSource>()[1].Play();
             }
             else if (transform.position == end.position)
             {
                 returning = true;
-                GetComponent<AudioSource>().Play();
+                GetComponents<AudioSource>()[1].Play();
             }
             transform.Rotate(Vector3.up, turnRate); 
         }

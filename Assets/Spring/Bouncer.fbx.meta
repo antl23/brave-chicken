@@ -15,7 +15,17 @@ ModelImporter:
   - first:
       74: -1907880122297279990
     second: BouncerArmature|Bouncer_Idle
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Metal
+    second: {fileID: 2100000, guid: 1297589ab2ba17548b7506ffc1982cea, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Red
+    second: {fileID: 2100000, guid: cfae01c64451789408fbc68404b8aa3e, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
