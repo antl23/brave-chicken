@@ -3,7 +3,12 @@ guid: 29696357a42bc3c419d66f064e53a1ae
 ModelImporter:
   serializedVersion: 21100
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: scarecrow
+    second: {fileID: 2100000, guid: b77a71fb0ac33e34ab24c1b861351a58, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
