@@ -104,7 +104,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: de3c979ebbc273a429377bb8b2397a80, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: c235f04c3baeef24aada4246d1b9bf0a, type: 2}
+      objectReference: {fileID: 2100000, guid: a3de705ad7b0a3e4eb721a6b8d64e402, type: 2}
     - target: {fileID: 919132149155446097, guid: de3c979ebbc273a429377bb8b2397a80, type: 3}
       propertyPath: m_Name
       value: pine_tree (2)
@@ -182,7 +182,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: 49b698f26be677d40a91de053fb288a8, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 0a6332b72fc7a44459a1a407af9cd705, type: 2}
+      objectReference: {fileID: 2100000, guid: b59f62b47eccf6344903fb65bfc3ce64, type: 2}
     - target: {fileID: 919132149155446097, guid: 49b698f26be677d40a91de053fb288a8, type: 3}
       propertyPath: m_Name
       value: rock
@@ -338,7 +338,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: de3c979ebbc273a429377bb8b2397a80, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: c235f04c3baeef24aada4246d1b9bf0a, type: 2}
+      objectReference: {fileID: 2100000, guid: a3de705ad7b0a3e4eb721a6b8d64e402, type: 2}
     - target: {fileID: 919132149155446097, guid: de3c979ebbc273a429377bb8b2397a80, type: 3}
       propertyPath: m_Name
       value: pine_tree (1)
@@ -416,7 +416,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: de3c979ebbc273a429377bb8b2397a80, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: c235f04c3baeef24aada4246d1b9bf0a, type: 2}
+      objectReference: {fileID: 2100000, guid: a3de705ad7b0a3e4eb721a6b8d64e402, type: 2}
     - target: {fileID: 919132149155446097, guid: de3c979ebbc273a429377bb8b2397a80, type: 3}
       propertyPath: m_Name
       value: pine_tree
@@ -494,7 +494,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: de3c979ebbc273a429377bb8b2397a80, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: c235f04c3baeef24aada4246d1b9bf0a, type: 2}
+      objectReference: {fileID: 2100000, guid: a3de705ad7b0a3e4eb721a6b8d64e402, type: 2}
     - target: {fileID: 919132149155446097, guid: de3c979ebbc273a429377bb8b2397a80, type: 3}
       propertyPath: m_Name
       value: pine_tree (3)
@@ -650,7 +650,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: 49b698f26be677d40a91de053fb288a8, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 0a6332b72fc7a44459a1a407af9cd705, type: 2}
+      objectReference: {fileID: 2100000, guid: b59f62b47eccf6344903fb65bfc3ce64, type: 2}
     - target: {fileID: 919132149155446097, guid: 49b698f26be677d40a91de053fb288a8, type: 3}
       propertyPath: m_Name
       value: rock (1)

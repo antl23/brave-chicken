@@ -3,7 +3,12 @@ guid: 2c23805d78ec6e7418df5e67c24e1654
 ModelImporter:
   serializedVersion: 21100
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: corn_stalk
+    second: {fileID: 2100000, guid: c4ec6544f9ef7ff40b0fc6d0b9936b74, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
