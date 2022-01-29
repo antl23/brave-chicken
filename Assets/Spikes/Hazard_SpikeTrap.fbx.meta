@@ -9,7 +9,17 @@ ModelImporter:
   - first:
       74: 7361817474926447254
     second: Hazard_SpikeTrap_Armature|SpikeTrap_Activate
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Grey
+    second: {fileID: 2100000, guid: 403d639ef9fc90e4aa56c4c44222f1cb, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Red
+    second: {fileID: 2100000, guid: b08291881f85f1b47910bad23012807c, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
