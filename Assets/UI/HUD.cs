@@ -30,7 +30,7 @@ public class HUD : MonoBehaviour
             trans.sizeDelta = new Vector2(spriteWidth, spriteHeight); // custom size
             Image image = imgObject.AddComponent<Image>();
             image.sprite = healthSprite;
-            imgObject.transform.SetParent(transform);
+            imgObject.transform.SetParent(startPoint);
             sprites.Add(imgObject);
         }
     }

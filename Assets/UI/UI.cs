@@ -18,7 +18,7 @@ public class UI : MonoBehaviour
 
     private void Update()
     {
-        if (!paused && player.finished == false && player.health > 0 && Input.GetKeyDown(KeyCode.Escape))
+        if (Time.timeScale == 1 && player.finished == false && player.health > 0 && Input.GetKeyDown(KeyCode.Escape))
         {
             if (paused) {
                 Resume();
@@ -81,13 +81,24 @@ public class UI : MonoBehaviour
 
     public void Restart()
     {
-        Resume();
+        player.canMove = true;
+        Time.timeScale = 1f;
+        paused = false;
+        HideCursor();
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
+    public void ToMainMenu()
+    {
+        overlay.SetActive(false);
+        player.canMove = true;
+        Time.timeScale = 1f;
+        paused = false;
+        SceneManager.LoadScene("MainMenu");
     }
 
     public void Quit()
     {
-        Debug.Log("Quit");
         Application.Quit();
     }
 
