@@ -119,10 +119,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startPoint: {fileID: 2977656130396129257}
   healthSprite: {fileID: 21300000, guid: 591c622ac431a5344b2b05e9522f9b05, type: 3}
-  gap: 100
+  gap: 80
   player: {fileID: 0}
-  spriteWidth: 70
-  spriteHeight: 90
+  spriteWidth: 60
+  spriteHeight: 80
   text: {fileID: 3390228563650786112}
 --- !u!1 &2977656129365399353
 GameObject:
@@ -234,7 +234,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 80, y: -80}
-  m_SizeDelta: {x: 70, y: 90}
+  m_SizeDelta: {x: 60, y: 80}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2977656129437554625
 CanvasRenderer:
@@ -307,7 +307,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 80, y: -80}
-  m_SizeDelta: {x: 100, y: 100}
+  m_SizeDelta: {x: 80, y: 80}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &2977656130680367798
 GameObject:
