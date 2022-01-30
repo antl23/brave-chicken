@@ -76,7 +76,7 @@ public class TargetHitbox : MonoBehaviour
             currTarget = mainTarget;
             GetComponent<AudioSource>().Play();
        }
-       if (currProjectile)
+       if (currProjectile != null)
        {
             float step = projectileSpeed * Time.deltaTime;
             currProjectile.transform.position = Vector3.MoveTowards(currProjectile.transform.position, currTarget.transform.position, step);
