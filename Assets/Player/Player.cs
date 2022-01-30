@@ -289,12 +289,18 @@ public class Player : MonoBehaviour
             if (health == 0)
             {
                 Time.timeScale = 0.1f;
-                deathMenu.SetActive(true);
                 canMove = false;
+                Invoke("ShowDeathMenu", 0.3f);
             }
             materialObject.GetComponent<Renderer>().material.SetColor("RimColor", Color.red);
             iframes = maxIFrames;
             bloodSys.Play();
         }
+    }
+
+    void ShowDeathMenu()
+    {
+        finished = true;
+        deathMenu.SetActive(true);
     }
 }

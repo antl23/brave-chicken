@@ -27,7 +27,7 @@ public class UI : MonoBehaviour
                 Pause();
             }
         }
-        if (player.health == 0 || player.finished)
+        if (player.finished)
         {
             ShowCursor();
         }
