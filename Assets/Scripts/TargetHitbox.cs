@@ -76,7 +76,7 @@ public class TargetHitbox : MonoBehaviour
             currTarget = mainTarget;
             GetComponent<AudioSource>().Play();
        }
-       if (currProjectile != null)
+       if (currProjectile != null && currTarget != null)
        {
             float step = projectileSpeed * Time.deltaTime;
             currProjectile.transform.position = Vector3.MoveTowards(currProjectile.transform.position, currTarget.transform.position, step);
@@ -86,7 +86,7 @@ public class TargetHitbox : MonoBehaviour
                 currTarget = null;
             }        
         }
-       if (currentParticleSys != null)
+        if (currentParticleSys != null)
         {
             currentParticleSys.transform.LookAt(new Vector3(armTransform.position.x, armTransform.position.y, armTransform.position.z));
         }

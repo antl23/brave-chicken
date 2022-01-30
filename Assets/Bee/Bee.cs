@@ -54,6 +54,7 @@ public class Bee : MonoBehaviour
             clips[1].Play(); // play death noise
             GetComponent<Animator>().SetTrigger("Death");
             gameObject.tag = "Untagged"; // wont hurt player
+            gameObject.layer = 0;
             Invoke("End", 2);
         }
     }

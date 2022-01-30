@@ -7,6 +7,13 @@ public class Egg : MonoBehaviour
 
     public ParticleSystem splatter;
 
+    private float timer;
+
+    public void Start()
+    {
+        timer = 1;
+    }
+
     public void Break()
     {
         GetComponent<AudioSource>().Play();
@@ -24,6 +31,12 @@ public class Egg : MonoBehaviour
         if (Time.timeScale == 1)
         {
             transform.Rotate(Vector3.right, 1f);
+        }
+        timer -= Time.deltaTime;
+        Debug.Log(timer);
+        if (timer <= 0)
+        {
+            End();
         }
     }
 

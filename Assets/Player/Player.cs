@@ -179,7 +179,7 @@ public class Player : MonoBehaviour
         else
         {
             playerAnimator.SetBool("InAir", false);
-            lastGroundedPoint = transform.position;
+            if (transform.parent == null) lastGroundedPoint = transform.position;
         }
         if (canMove)
         {

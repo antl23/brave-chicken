@@ -90,7 +90,7 @@ public class UI : MonoBehaviour
 
     public void ToMainMenu()
     {
-        overlay.SetActive(false);
+        if (overlay != null) overlay.SetActive(false);
         player.canMove = true;
         Time.timeScale = 1f;
         paused = false;

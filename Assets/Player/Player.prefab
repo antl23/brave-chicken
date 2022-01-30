@@ -499,7 +499,7 @@ MonoBehaviour:
   cameraCenter: {fileID: 4921674600441058619}
   cameraPosition: 1
   shadowObject: {fileID: 6673025715749720733, guid: ff334c001fb301d48b67da44c98ba4bb, type: 3}
-  lookSpeed: 1
+  lookSpeed: 0.5
   lookXLimit: 30
   health: 3
   maxIFrames: 90
