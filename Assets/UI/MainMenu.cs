@@ -7,10 +7,12 @@ public class MainMenu : MonoBehaviour
 {
     public GameObject menu;
     public GameObject controls;
+    public GameObject credits;
 
     public void StartGame()
     {
         SceneManager.LoadScene("Farm");
+        Time.timeScale = 1f;
     }
 
     public void Controls()
@@ -30,4 +32,15 @@ public class MainMenu : MonoBehaviour
         Application.Quit();
     }
 
+    public void OpenCredits()
+    {
+        menu.SetActive(false);
+        credits.SetActive(true);
+    }
+
+    public void CloseCredits()
+    {
+        menu.SetActive(true);
+        credits.SetActive(false);
+    }
 }

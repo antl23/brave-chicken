@@ -43,6 +43,7 @@ public class Player : MonoBehaviour
     private Vector3 initialShadowScale;
     private Color initColor;
     private Vector3 lastGroundedPoint;
+    private AudioSource walkSound;
 
     public bool canMove = true;
 
@@ -59,6 +60,7 @@ public class Player : MonoBehaviour
         initialShadowScale = shadow.transform.localScale;
         initColor = materialObject.GetComponent<Renderer>().material.GetColor("RimColor");
         //Debug.Log(materialObject.GetComponent<Renderer>().material.GetColor("RimColor"));
+        walkSound = GetComponents<AudioSource>()[3];
     }
 
     private void OnCollisionStay(Collision col)
@@ -225,7 +227,6 @@ public class Player : MonoBehaviour
             if (Input.GetAxis("Vertical") != 0f || Input.GetAxis("Horizontal") != 0f)
             {
                 playerAnimator.SetBool("Walk", true);
-                AudioSource walkSound = GetComponents<AudioSource>()[3];
                 if (!walkSound.isPlaying) walkSound.PlayDelayed(.5f);
                 meshTransform.rotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));
             }
@@ -272,6 +273,10 @@ public class Player : MonoBehaviour
         } else
         {
             shadow.transform.position = Vector3.zero;
+        }
+        if (Time.timeScale < 1)
+        {
+            walkSound.Stop();
         }
     }
 
