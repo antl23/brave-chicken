@@ -11,18 +11,9 @@ public class Player : MonoBehaviour
     public uint dashLength = 120;
     public uint dashDelay = 120;
     public float gravity = 20.0f;
-    public Transform cameraTransform;
     public Transform meshTransform;
     public Animator playerAnimator;
-    public Transform rearCameraPoint;
-    public Transform frontCameraPoint;
-    public Transform leftCameraPoint;
-    public Transform rightCameraPoint;
-    public Transform cameraCenter;
-    public CameraPosition cameraPosition = CameraPosition.Rear;
     public GameObject shadowObject;
-    public float lookSpeed = 20.0f;
-    public float lookXLimit = 60.0f;
     public uint health;
     public uint maxIFrames;
     public GameObject deathMenu;
@@ -35,10 +26,6 @@ public class Player : MonoBehaviour
     private bool canDoubleJump = true;
     private bool canDash = true;
     private uint dashTimer = 0;
-    private bool sideScroll = false;
-    private Vector3? cameraTarget;
-    private Vector3 startCamPos;
-    private float cameraMoveAmount = 0.0f;
     private GameObject shadow;
     private Vector3 initialShadowScale;
     private Color initColor;
@@ -55,11 +42,9 @@ public class Player : MonoBehaviour
     {
         characterController = GetComponent<CharacterController>();
         rotation.y = transform.eulerAngles.y;
-        cameraTransform.LookAt(cameraCenter);
         shadow = Instantiate(shadowObject, transform);
         initialShadowScale = shadow.transform.localScale;
         initColor = materialObject.GetComponent<Renderer>().material.GetColor("RimColor");
-        //Debug.Log(materialObject.GetComponent<Renderer>().material.GetColor("RimColor"));
         walkSound = GetComponents<AudioSource>()[3];
     }
 
@@ -83,33 +68,7 @@ public class Player : MonoBehaviour
                 canDash = true;
                 Destroy(other.gameObject);
                 break;
-            case "Camera":
-                CameraPosition camPos = other.GetComponent<CameraTrigger>().cameraPosition;
-                switch (camPos)
-                {
-                    case CameraPosition.Rear:
-                        cameraTarget = rearCameraPoint.localPosition;
-                        startCamPos = cameraTransform.localPosition;
-                        cameraMoveAmount = 0.0f;
-                        // cameraTransform.SetParent(rearCameraPoint, false);
-                        break;
-                    case CameraPosition.Front:
-                        cameraTarget = frontCameraPoint.localPosition;
-                        startCamPos = cameraTransform.localPosition;
-                        cameraMoveAmount = 0.0f;
-                        break;
-                    case CameraPosition.Left:
-                        cameraTarget = leftCameraPoint.localPosition;
-                        startCamPos = cameraTransform.localPosition;
-                        cameraMoveAmount = 0.0f;
-                        break;
-                    case CameraPosition.Right:
-                        cameraTarget = rightCameraPoint.localPosition;
-                        startCamPos = cameraTransform.localPosition;
-                        cameraMoveAmount = 0.0f;
-                        break;
-                }
-                break;
+            
             case "Spring":
                 other.gameObject.GetComponent<AudioSource>().Play();
                 direction.y = jumpSpeed * 2;
@@ -183,11 +142,17 @@ public class Player : MonoBehaviour
         }
         if (canMove)
         {
-            Vector3 forward = new Vector3(cameraTransform.transform.forward.x, 0, cameraTransform.transform.forward.z);
-            Vector3 right = new Vector3(cameraTransform.transform.right.x, 0, cameraTransform.transform.right.z);
-            float curSpeedX = sideScroll ? 0 : speed * Input.GetAxis("Vertical");
-            float curSpeedZ = speed * Input.GetAxis("Horizontal");
-            if (Input.GetButtonDown("Fire3") && canDash && (curSpeedZ != 0 || curSpeedX != 0))
+            Vector3 forward = Camera.main.transform.forward;
+            Vector3 right = Camera.main.transform.right;
+            forward.y = 0;
+            right.y = 0;
+            forward.Normalize();
+            right.Normalize();
+            float moveZ = Input.GetAxis("Horizontal") * speed;
+            float moveX = Input.GetAxis("Vertical") * speed;
+            direction = (forward * moveX) + (right * moveZ) + Vector3.up * direction.y;
+
+            if (Input.GetButtonDown("Fire3") && canDash && (moveX != 0 || moveZ != 0))
             {
                 dashTimer = dashLength + dashDelay;
                 canDash = false;
@@ -196,12 +161,12 @@ public class Player : MonoBehaviour
             }
             if (dashTimer > 0) {
                 if (dashTimer > dashDelay) { 
-                    curSpeedZ *= dashMultiplier;
-                    curSpeedX *= dashMultiplier;
+                    moveZ *= dashMultiplier;
+                    moveX *= dashMultiplier;
                 }
             }
             float curSpeedY = dashTimer == 0 ? direction.y : 0;
-            direction = (forward * curSpeedX) + (right * curSpeedZ) + (Vector3.up * curSpeedY);
+            direction = (forward * moveX) + (right * moveZ) + (Vector3.up * curSpeedY);
             if (characterController.isGrounded)
             {
                 canDoubleJump = true;
@@ -228,7 +193,11 @@ public class Player : MonoBehaviour
             {
                 playerAnimator.SetBool("Walk", true);
                 if (!walkSound.isPlaying) walkSound.PlayDelayed(.5f);
-                meshTransform.rotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));
+                if (direction.x != 0 || direction.z != 0)
+                {
+                    transform.rotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));
+                }
+
             }
             else {
                 playerAnimator.SetBool("Walk", false);
@@ -246,19 +215,7 @@ public class Player : MonoBehaviour
 
             characterController.Move(direction * Time.deltaTime);
         }
-        if (cameraTarget != null)
-        {
-            cameraTransform.localPosition = Vector3.Lerp(startCamPos, cameraTarget.Value, cameraMoveAmount);
-            cameraMoveAmount += Time.deltaTime * lookSpeed;
-            cameraMoveAmount = Mathf.Clamp(cameraMoveAmount, 0.0f, 1.0f);
-            cameraTransform.LookAt(cameraCenter);
-            if (cameraMoveAmount == 1)
-            {
-                cameraTransform.localPosition = cameraTarget.Value;
-                cameraMoveAmount = 0.0f;
-                cameraTarget = null;
-            }
-        }
+        
         RaycastHit hit;
         if (Physics.Raycast(transform.position, Vector3.down, out hit, Mathf.Infinity))
         {
