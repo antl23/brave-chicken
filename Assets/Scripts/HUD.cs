@@ -16,6 +16,7 @@ public class HUD : MonoBehaviour
     public TextMeshProUGUI text;
     private List<GameObject> sprites = new List<GameObject>();
     private float timer = 0;
+    [SerializeField] TextMeshProUGUI scoreText;
 
     // Start is called before the first frame update
     void Start()
@@ -55,5 +56,9 @@ public class HUD : MonoBehaviour
             TimeSpan timeSpan = TimeSpan.FromSeconds(timer);
             text.text = String.Format("{0:0}:{1:00}", timeSpan.Minutes, timeSpan.Seconds);
         }
+    }
+    public void UpdateScore()
+    {
+        scoreText.text = player.Coin.ToString();
     }
 }

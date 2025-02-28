@@ -16,6 +16,7 @@ TagManager:
   - KillBox
   - Platform
   - Victory
+  - Coin
   layers:
   - Default
   - TransparentFX

@@ -31,8 +31,10 @@ public class Player : MonoBehaviour
     private Color initColor;
     private Vector3 lastGroundedPoint;
     private AudioSource walkSound;
+    [SerializeField] HUD hud;
 
     public bool canMove = true;
+    public int Coin = 0;
 
     CharacterController characterController;
     Vector3 direction = Vector3.zero;
@@ -102,6 +104,11 @@ public class Player : MonoBehaviour
                 victoryMenu.SetActive(true);
                 canMove = false;
                 break;
+            case "Coin":
+                Destroy(other.gameObject);
+                Coin++;
+                hud.UpdateScore();
+                break;
         }
     }
 
@@ -142,14 +149,18 @@ public class Player : MonoBehaviour
         }
         if (canMove)
         {
+            //get forward and right vectors based on the camera position
             Vector3 forward = Camera.main.transform.forward;
             Vector3 right = Camera.main.transform.right;
+            //removes y because we don't need it or want it
             forward.y = 0;
             right.y = 0;
             forward.Normalize();
             right.Normalize();
+            //get the input from the player
             float moveZ = Input.GetAxis("Horizontal") * speed;
             float moveX = Input.GetAxis("Vertical") * speed;
+            //movement directrion calculation
             direction = (forward * moveX) + (right * moveZ) + Vector3.up * direction.y;
 
             if (Input.GetButtonDown("Fire3") && canDash && (moveX != 0 || moveZ != 0))
